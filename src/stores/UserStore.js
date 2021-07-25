@@ -4,6 +4,10 @@ export const name = writable('Kevin Chaplin')
 export const nationality = writable('British')
 export const rank = writable('Plz no Punterino')
 
+export const testTimeData = writable({
+  time: "1:59.233"
+})
+
 export const circuitData = writable([
   {
     id: 1,
