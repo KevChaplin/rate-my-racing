@@ -4,9 +4,16 @@ export const name = writable('Kevin Chaplin')
 export const nationality = writable('British')
 export const rank = writable('Plz no Punterino')
 
-export const testTimeData = writable({
-  time: "1:59.233"
-})
+export const testTimeData = writable([
+  {
+    circuit: "Imola",
+    time: "1:59.233"
+  },
+  {
+    circuit: "Monaco",
+    time: "1:48.102"
+  }
+])
 
 export const circuitData = writable([
   {
@@ -16,7 +23,7 @@ export const circuitData = writable([
     platinum: 104500,
     gold: 105900,
     silver: 107900,
-    user: null
+    user: ""
   },
   {
     id: 2,
