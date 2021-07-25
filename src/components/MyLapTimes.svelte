@@ -1,20 +1,26 @@
 <script>
 import { name, rank} from '../stores/UserStore.js'
 import { circuitData } from '../stores/UserStore.js'
+import { testTimeData } from '../stores/UserStore.js'
 
 let userTitle = ""
 
-let testTime = "3:56.1"
+// let testTime = $testTimeData.time
 
-function testFunction() {
-
+function updateTimes() {
   const testObj = document.getElementById("input1")
-  console.log(testTime)
-  if(testObj.checkValidity()) {console.log("valid")}
-  if(testObj.validity.patternMismatch) {console.log ("patternMismatch")}
+
+  // console.log(testObj.value)
+
+  if(testObj.checkValidity()) {
+    testTimeData.set({time: testObj.value})
+    console.log(testObj.value, $testTimeData)
+  } else {
+    console.log("error")
+  }
 }
 
-// insert "rank" at end of name (single name) or before surname (if present)
+// insert "rank" at end of name (single name) or before surname
 const regex = /(\s+[\w-]+)$/g
 
 if (!regex.test($name)) {
@@ -26,7 +32,7 @@ if (!regex.test($name)) {
 
 <div style="text-align:center">
 <h2>{userTitle}</h2>
-<button on:click={() => testFunction()}>Save</button>
+<button on:click={() => updateTimes()}>Save</button>
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -44,7 +50,7 @@ if (!regex.test($name)) {
   <p>USA</p>
   <p>Base</p>
   <div class="user-time">
-    <input id="input1" type="text" pattern="[0-3]:[0-5][0-9]\.[0-9][0-9]*[0-9]*" bind:value={testTime}>
+    <input id="input1" type="text" pattern="[0-3]:[0-5][0-9]\.[0-9][0-9]*[0-9]*" value={$testTimeData.time}>
   </div>
   <p>Silver</p>
 </div>
