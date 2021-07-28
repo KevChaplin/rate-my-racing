@@ -2,16 +2,17 @@
 import { name, rank} from '../stores/UserStore.js'
 import { circuitData } from '../stores/UserStore.js'
 import { inputArr } from '../stores/UserStore.js'
+import SaveButton from './SaveButton.svelte'
 
 //  LOGICAL FLOW:
-// --> User enters lap time in input elements.
-// --> Array of input lap times (store: inputArr) is updated with each new entry.
-// --> "Save"" data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
+// --> User enters lap time (input)
+// --> Array of input lap times (store: inputArr) is updated.
+// --> Update data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
 // --> For each entry that is valid, array of user times (store: XXXXXX) is updated.
 // --> For invalid entries, that entry's value is reset to the value recorder in (store: XXXX)
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
-// Any changed input value is added to array, overwriting any already input values for the same circuit.
+// Any changed input value is added to array, overwriting any already input values for same circuits.
 function inputChange(e) {
   let newArr = $inputArr.filter(function(item) {
     return item.circuit !== e.target.id
@@ -23,29 +24,6 @@ function inputChange(e) {
     }
   ]
   inputArr.set([...newArr])
-  // ^ CHECK
-}
-
-// User entered values (store:inputArr) values are checked for format m:ss:xxx.
-// if valid, relevent user times (store:circuitData) is updated.
-// if not valid, input value reset to value stored in store:circuitData. Error message.
-// finally inputArr is reset to blank array.
-function saveTimes() {
-  const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
-  let data = [...$circuitData]
-  $inputArr.forEach(item => {
-    let index = data.findIndex(entry => entry.circuit === item.circuit)
-    if (timesRegex.test(item.inputValue)) {
-      data[index].user = item.inputValue
-      circuitData.set([...data])
-    }
-    else {
-      document.getElementById(item.circuit).value = data[index].user
-      console.log("error")
-    }
-  })
-  inputArr.set([])
-  console.log($circuitData)
 }
 
 // Insert "rank" at end of name (single name) or before surname
@@ -62,7 +40,7 @@ if (!surnameRegex.test($name)) {
 
 <div style="text-align:center">
 <h2>{userTitle}</h2>
-<button on:click|preventDefault={() => saveTimes()}>Save</button>
+<SaveButton />
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -72,10 +50,6 @@ if (!surnameRegex.test($name)) {
   <p>TIME</p>
   <p>RATING</p>
 </div>
-
-<!-- input checks for user entered lap times in format m:ss.xxx with minimum of 1 decimal place entered. -->
-<!-- note - preferred regex of ... \.[0-9]{1,3} not working as expected   pattern="[0-3]:[0-5][0-9]\.[0-9][0-9][0-9]" -->
-<!-- test div -->
 
 {#each $circuitData as entry}
 <div class="my-times">
@@ -92,10 +66,6 @@ if (!surnameRegex.test($name)) {
 <style>
   h2 {
     color: white
-  }
-  button {
-    margin: auto;
-    padding: 5px 10px;
   }
   .my-times {
     box-sizing: border-box;
