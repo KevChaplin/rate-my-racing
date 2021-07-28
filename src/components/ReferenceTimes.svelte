@@ -1,6 +1,5 @@
 <script>
   import { circuitData } from '../stores/UserStore.js'
-  import convertTime from './convertTime.js'
 </script>
 
 <div class="my-times" style="font-weight:bold">
@@ -14,10 +13,10 @@
 {#each $circuitData as entry}
 <div class="my-times">
   <p class="entry">{entry.circuit}</p>
-  <p class="entry">{convertTime(entry.platinum)}</p>
-  <p class="entry">{convertTime(entry.gold)}</p>
-  <p class="entry">{convertTime(entry.silver)}</p>
-  <p class="entry">{`${convertTime(entry.silver)}+`}</p>
+  <p class="entry">{entry.platinum}</p>
+  <p class="entry">{entry.gold}</p>
+  <p class="entry">{entry.silver}</p>
+  <p class="entry">{`${entry.silver}+`}</p>
 </div>
 {/each}
 

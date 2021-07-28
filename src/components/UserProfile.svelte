@@ -1,11 +1,15 @@
 <script>
-  import { name, nationality, rank } from '../stores/UserStore.js'
+  import { name, nationality } from '../stores/UserStore.js'
+  import { rank, assess } from '../stores/AssessmentStore.js'
 
   let rank_entry;
 
   rank.subscribe(entry => {
     rank_entry = entry
   })
+
+  //test
+  console.log($assess)
 </script>
 
 <h2>User Profile</h2>

@@ -1,15 +1,16 @@
-// receive time (in milliseconds) and return time in m:ss:xxx format
-function convertTime(time) {
-  let min = Math.floor(time / 60000)
-  let sec = Math.floor((time - min * 60000) / 1000)
-  let mil = time - (min * 60000) - ( sec * 1000)
+// receive time (in string) and return time in milliseconds
+function convertTime(timeStr) {
+  let min = parseInt(timeStr.substring(0,1))
+  let sec = parseInt(timeStr.substring(2,4))
+  let mil = parseInt(timeStr.substring(5))
 
-  if (sec < 10) { sec = `0${sec}` }
-
-  if (mil < 10) { mil = `00${mil}`}
-  else if (mil < 100) { mil = `0${mil}`}
-
-  return `${min}:${sec}.${mil}`
+  return (min * 60000) + (sec * 1000) + mil
 }
 
 export default convertTime
+
+
+// if (sec < 10) { sec = `0${sec}` }
+//
+// if (mil < 10) { mil = `00${mil}`}
+// else if (mil < 100) { mil = `0${mil}`}

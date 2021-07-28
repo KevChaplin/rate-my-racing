@@ -1,5 +1,6 @@
 <script>
-import { name, rank} from '../stores/UserStore.js'
+import { name } from '../stores/UserStore.js'
+import { rank } from '../stores/AssessmentStore.js'
 import { circuitData } from '../stores/UserStore.js'
 import { inputArr } from '../stores/UserStore.js'
 import SaveButton from './SaveButton.svelte'
