@@ -1,51 +1,55 @@
 <script>
 import { name, rank} from '../stores/UserStore.js'
 import { circuitData } from '../stores/UserStore.js'
-import { testTimeData } from '../stores/UserStore.js'
-import { afterUpdate } from 'svelte';
+import { inputArr } from '../stores/UserStore.js'
 
-let userTitle = ""
-let inputArr = []
+//  LOGICAL FLOW:
+// --> User enters lap time in input elements.
+// --> Array of input lap times (store: inputArr) is updated with each new entry.
+// --> "Save"" data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
+// --> For each entry that is valid, array of user times (store: XXXXXX) is updated.
+// --> For invalid entries, that entry's value is reset to the value recorder in (store: XXXX)
 
-// after store data is received, create array of all tracks and associated input times
-afterUpdate(() => {
-  $testTimeData.forEach(item => {
-    inputArr.push(
-      {
-        circuit: item.circuit,
-        inputValue: document.getElementById(item.circuit).value
-      }
-    )
-  })
-})
-
-// on change in input value (on user entry) relevent inputArr entry (circuit) time is updated.
+// On input change, update store: inputArr, which records all input values so they can be validated.
+// Any changed input value is added to array, overwriting any already input values for the same circuit.
 function inputChange(e) {
-  let inputArrIndex = inputArr.findIndex(entry => entry.circuit == e.target.id)
-  inputArr[inputArrIndex].inputValue = e.target.value
-}
-
-function updateTimes() {
-  const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
-  inputArr.forEach(item => {
-    if (!timesRegex.test(item.inputValue))
-    console.log("error")
+  let newArr = $inputArr.filter(function(item) {
+    return item.circuit !== e.target.id
   })
-
-  // if(testObj.checkValidity()) {
-  //   testTimeData.set([
-  //     {
-  //       circuit: "Imola",
-  //       time: testObj.value
-  //     }
-  //   ])
-  //   console.log(testObj.value, $testTimeData)
-  // } else {
-  //   console.log("error")
-  // }
+  newArr = [ ...newArr,
+    {
+      circuit: e.target.id,
+      inputValue: e.target.value
+    }
+  ]
+  inputArr.set([...newArr])
+  // ^ CHECK
 }
 
-// insert "rank" at end of name (single name) or before surname
+// User entered values (store:inputArr) values are checked for format m:ss:xxx.
+// if valid, relevent user times (store:circuitData) is updated.
+// if not valid, input value reset to value stored in store:circuitData. Error message.
+// finally inputArr is reset to blank array.
+function saveTimes() {
+  const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
+  let data = [...$circuitData]
+  $inputArr.forEach(item => {
+    let index = data.findIndex(entry => entry.circuit === item.circuit)
+    if (timesRegex.test(item.inputValue)) {
+      data[index].user = item.inputValue
+      circuitData.set([...data])
+    }
+    else {
+      document.getElementById(item.circuit).value = data[index].user
+      console.log("error")
+    }
+  })
+  inputArr.set([])
+  console.log($circuitData)
+}
+
+// Insert "rank" at end of name (single name) or before surname
+let userTitle = ""
 const surnameRegex = /(\s+[\w-]+)$/g
 
 if (!surnameRegex.test($name)) {
@@ -53,11 +57,12 @@ if (!surnameRegex.test($name)) {
 } else {
   userTitle = $name.replace(surnameRegex, ` "${$rank}" ${$name.match(surnameRegex)}`)
 }
+
 </script>
 
 <div style="text-align:center">
 <h2>{userTitle}</h2>
-<button on:click={() => updateTimes()}>Save</button>
+<button on:click|preventDefault={() => saveTimes()}>Save</button>
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -71,33 +76,15 @@ if (!surnameRegex.test($name)) {
 <!-- input checks for user entered lap times in format m:ss.xxx with minimum of 1 decimal place entered. -->
 <!-- note - preferred regex of ... \.[0-9]{1,3} not working as expected   pattern="[0-3]:[0-5][0-9]\.[0-9][0-9][0-9]" -->
 <!-- test div -->
-<div class="my-times">
-  <p>{$testTimeData[0].circuit}</p>
-  <p>USA</p>
-  <p>Base</p>
-  <div class="user-time">
-    <input id={$testTimeData[0].circuit} type="text" value={$testTimeData[0].time} on:change={(e) => inputChange(e)}>
-  </div>
-  <p>Silver</p>
-</div>
-<!-- test div -->
-<div class="my-times">
-  <p>{$testTimeData[1].circuit}</p>
-  <p>USA</p>
-  <p>Base</p>
-  <div class="user-time">
-    <input id={$testTimeData[1].circuit} type="text" value={$testTimeData[1].time} on:change={(e) => inputChange(e)}>
-  </div>
-  <p>Silver</p>
-</div>
-
 
 {#each $circuitData as entry}
 <div class="my-times">
   <p>{entry.circuit}</p>
   <p>{entry.location}</p>
   <p>Base</p>
-  <p class="user-time">{entry.user}</p>
+  <div class="user-time">
+    <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
+  </div>
   <p>Silver</p>
 </div>
 {/each}
