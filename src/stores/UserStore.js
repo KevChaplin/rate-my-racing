@@ -4,6 +4,21 @@ export const name = writable('Kevin Chaplin')
 export const nationality = writable('British')
 export const rank = writable('Plz no Punterino')
 
+export const testTimeData = writable([
+  {
+    circuit: "Imola",
+    time: "1:59.233"
+  },
+  {
+    circuit: "Monaco",
+    time: "1:48.102"
+  }
+])
+
+export const inputArr = writable([
+
+])
+
 export const circuitData = writable([
   {
     id: 1,
@@ -12,7 +27,7 @@ export const circuitData = writable([
     platinum: 104500,
     gold: 105900,
     silver: 107900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 2,
@@ -21,7 +36,7 @@ export const circuitData = writable([
     platinum: 122500,
     gold: 123900,
     silver: 125900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 3,
@@ -30,7 +45,7 @@ export const circuitData = writable([
     platinum: 84000,
     gold: 85400,
     silver: 86900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 4,
@@ -39,7 +54,7 @@ export const circuitData = writable([
     platinum: 104500,
     gold: 105900,
     silver: 107400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 5,
@@ -48,7 +63,7 @@ export const circuitData = writable([
     platinum: 102000,
     gold: 103400,
     silver: 105400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 6,
@@ -57,7 +72,7 @@ export const circuitData = writable([
     platinum: 83500,
     gold: 84900,
     silver: 86400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 7,
@@ -66,7 +81,7 @@ export const circuitData = writable([
     platinum: 94500,
     gold: 95900,
     silver: 97400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 8,
@@ -75,7 +90,7 @@ export const circuitData = writable([
     platinum: 108500,
     gold: 109900,
     silver: 111900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 9,
@@ -84,7 +99,7 @@ export const circuitData = writable([
     platinum: 115000,
     gold: 116400,
     silver: 117900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 10,
@@ -93,7 +108,7 @@ export const circuitData = writable([
     platinum: 115000,
     gold: 116400,
     silver: 118400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 11,
@@ -102,7 +117,7 @@ export const circuitData = writable([
     platinum: 119500,
     gold: 120900,
     silver: 122400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 12,
@@ -111,7 +126,7 @@ export const circuitData = writable([
     platinum: 119500,
     gold: 120900,
     silver: 122400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 13,
@@ -120,7 +135,7 @@ export const circuitData = writable([
     platinum: 121000,
     gold: 122400,
     silver: 124400,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 14,
@@ -129,7 +144,7 @@ export const circuitData = writable([
     platinum: 96000,
     gold: 97400,
     silver: 98900,
-    user: null
+    user: "1:48.102"
   },
   {
     id: 15,
@@ -138,6 +153,6 @@ export const circuitData = writable([
     platinum: 89000,
     gold: 90400,
     silver: 91900,
-    user: null
+    user: "1:48.102"
   },
 ])
