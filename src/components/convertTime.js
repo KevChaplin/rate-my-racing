@@ -1,4 +1,4 @@
-// receive time (in string) and return time in milliseconds
+// receive time (string) and return time in milliseconds (number)
 function convertTime(timeStr) {
   let min = parseInt(timeStr.substring(0,1))
   let sec = parseInt(timeStr.substring(2,4))
@@ -8,9 +8,3 @@ function convertTime(timeStr) {
 }
 
 export default convertTime
-
-
-// if (sec < 10) { sec = `0${sec}` }
-//
-// if (mil < 10) { mil = `00${mil}`}
-// else if (mil < 100) { mil = `0${mil}`}

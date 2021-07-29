@@ -1,6 +1,6 @@
 <script>
   import { name, nationality } from '../stores/UserStore.js'
-  import { rank, assess } from '../stores/AssessmentStore.js'
+  import { rank, driverRating } from '../stores/DerivedStore.js'
 
   let rank_entry;
 
@@ -8,8 +8,6 @@
     rank_entry = entry
   })
 
-  //test
-  console.log($assess)
 </script>
 
 <h2>User Profile</h2>
@@ -19,7 +17,7 @@
   <p class="text-left">Nationality:</p>
   <input placeholder="British" bind:value={$nationality}>
   <p class="text-left">Rating:</p>
-  <p class="text-right">Silver</p>
+  <p class="text-right">{$driverRating}</p>
   <p class="text-left">Rank:</p>
   <p class="text-right">{`"${rank_entry}"`}</p>
   <p class="text-left">Strongest Track:</p>

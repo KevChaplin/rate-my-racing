@@ -15,15 +15,14 @@ export const userRanks = readable([
   "Divebomb!",
   "Rage quit",
   "A little knowledge is a dangerous thing",
-  "Drift King",
-  "Get outta my way!",
+  "You shall not pass!",
   "Plz no Punterino!",
   "I am a driving god!",
   "The Stig",
   "Alien"
 ])
 
-export const assess = derived(circuitData, ($circuitData) => {
+export const circuitEval = derived(circuitData, ($circuitData) => {
   let arr = []
   $circuitData.forEach(item => arr = [...arr,
     {
@@ -37,4 +36,26 @@ export const assess = derived(circuitData, ($circuitData) => {
       }
   ])
   return arr
+})
+
+export const driverRating = derived(circuitEval, ($circuitEval) => {
+  function points(rating) {
+    return (
+      rating === "Platinum" ? 3
+      : rating === "Gold" ? 2
+      : rating === "Silver" ? 1
+      : 0
+    )
+  }
+  let scoreTotal = $circuitEval.reduce(function(total, current) {
+    return total + points(current.rating)
+  }, 0)
+  let scoreAvg = Math.round(scoreTotal / $circuitEval.length)
+
+  return (
+    scoreAvg === 3 ? "Platinum"
+    : scoreAvg === 2 ? "Gold"
+    : scoreAvg === 1 ? "Silver"
+    : "Bronze"
+  )
 })

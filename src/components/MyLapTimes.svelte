@@ -1,8 +1,6 @@
 <script>
-import { name } from '../stores/UserStore.js'
-import { rank } from '../stores/AssessmentStore.js'
-import { circuitData } from '../stores/UserStore.js'
-import { inputArr } from '../stores/UserStore.js'
+import { name, circuitData, inputArr } from '../stores/UserStore.js'
+import { rank, circuitEval } from '../stores/DerivedStore.js'
 import SaveButton from './SaveButton.svelte'
 
 //  LOGICAL FLOW:
@@ -25,6 +23,11 @@ function inputChange(e) {
     }
   ]
   inputArr.set([...newArr])
+}
+
+function circuitRating(circuit) {
+  let entry = $circuitEval.filter(item => item.circuit === circuit)
+  return entry[0].rating
 }
 
 // Insert "rank" at end of name (single name) or before surname
@@ -60,7 +63,7 @@ if (!surnameRegex.test($name)) {
   <div class="user-time">
     <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
   </div>
-  <p>Silver</p>
+  <p>{circuitRating(entry.circuit)}</p>
 </div>
 {/each}
 
