@@ -2,26 +2,25 @@ import { readable, writable, derived } from 'svelte/store'
 import convertTime from '../components/convertTime.js'
 import { circuitData } from '../stores/UserStore.js'
 
-export const rank = writable('Plz no Punterino')
-
-export const userRanks = readable([
+const userRanks = [
   "Which one's the brake pedal?",
   "Why is this so difficult?",
   "I'm going back to Gran Turismo",
-  "T1 menace",
-  "Mobile chicane",
+  "T1 Menace",
+  "Mobile Chicane",
   "Captain Slow",
   "What does that blue flag mean?",
   "Divebomb!",
-  "Rage quit",
+  "Rage Quit",
   "A little knowledge is a dangerous thing",
   "You shall not pass!",
   "Plz no Punterino!",
   "I am a driving god!",
   "The Stig",
   "Alien"
-])
+]
 
+// Evaluate each circuit's user time and return rating and delta (difference from platimum time) for finding best and worst circuit.
 export const circuitEval = derived(circuitData, ($circuitData) => {
   let arr = []
   $circuitData.forEach(item => arr = [...arr,
@@ -38,7 +37,9 @@ export const circuitEval = derived(circuitData, ($circuitData) => {
   return arr
 })
 
+// Return object of overall driver rating and driver rank
 export const driverRating = derived(circuitEval, ($circuitEval) => {
+  //Allocate points per rating per circuits. Find average accross all circuits to find overall driver rating.
   function points(rating) {
     return (
       rating === "Platinum" ? 3
@@ -51,11 +52,18 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
     return total + points(current.rating)
   }, 0)
   let scoreAvg = Math.round(scoreTotal / $circuitEval.length)
-
-  return (
-    scoreAvg === 3 ? "Platinum"
+  let rating = scoreAvg === 3 ? "Platinum"
     : scoreAvg === 2 ? "Gold"
     : scoreAvg === 1 ? "Silver"
     : "Bronze"
-  )
+
+  // Allocate userRanks over range of possible scores (set up in case number of tracks change)
+  let maxScore = $circuitEval.length * 3
+  let ranksIndex = Math.round(scoreTotal / (maxScore / userRanks.length))
+  let rank = userRanks[ranksIndex]
+
+  return {
+    rating: rating,
+    rank: rank
+  }
 })
