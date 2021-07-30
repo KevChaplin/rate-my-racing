@@ -1,11 +1,6 @@
 <script>
-  import { name, nationality, rank } from '../stores/UserStore.js'
-
-  let rank_entry;
-
-  rank.subscribe(entry => {
-    rank_entry = entry
-  })
+  import { name, nationality } from '../stores/UserStore.js'
+  import { driverRating } from '../stores/DerivedStore.js'
 </script>
 
 <h2>User Profile</h2>
@@ -15,9 +10,9 @@
   <p class="text-left">Nationality:</p>
   <input placeholder="British" bind:value={$nationality}>
   <p class="text-left">Rating:</p>
-  <p class="text-right">Silver</p>
+  <p class="text-right">{$driverRating.rating}</p>
   <p class="text-left">Rank:</p>
-  <p class="text-right">{`"${rank_entry}"`}</p>
+  <p class="text-right">{`"${$driverRating.rank}"`}</p>
   <p class="text-left">Strongest Track:</p>
   <p class="text-right">Barcelona</p>
   <p class="text-left">Weakest Track:</p>

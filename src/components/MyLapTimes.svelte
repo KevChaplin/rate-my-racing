@@ -1,17 +1,18 @@
 <script>
-import { name, rank} from '../stores/UserStore.js'
-import { circuitData } from '../stores/UserStore.js'
-import { inputArr } from '../stores/UserStore.js'
+
+import { name, circuitData, inputArr } from '../stores/UserStore.js'
+import { circuitEval, driverRating } from '../stores/DerivedStore.js'
+import SaveButton from './SaveButton.svelte'
 
 //  LOGICAL FLOW:
-// --> User enters lap time in input elements.
-// --> Array of input lap times (store: inputArr) is updated with each new entry.
-// --> "Save"" data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
+// --> User enters lap time (input)
+// --> Array of input lap times (store: inputArr) is updated.
+// --> Update data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
 // --> For each entry that is valid, array of user times (store: XXXXXX) is updated.
 // --> For invalid entries, that entry's value is reset to the value recorder in (store: XXXX)
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
-// Any changed input value is added to array, overwriting any already input values for the same circuit.
+// Any changed input value is added to array, overwriting any already input values for same circuits.
 function inputChange(e) {
   let newArr = $inputArr.filter(function(item) {
     return item.circuit !== e.target.id
@@ -23,29 +24,11 @@ function inputChange(e) {
     }
   ]
   inputArr.set([...newArr])
-  // ^ CHECK
 }
 
-// User entered values (store:inputArr) values are checked for format m:ss:xxx.
-// if valid, relevent user times (store:circuitData) is updated.
-// if not valid, input value reset to value stored in store:circuitData. Error message.
-// finally inputArr is reset to blank array.
-function saveTimes() {
-  const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
-  let data = [...$circuitData]
-  $inputArr.forEach(item => {
-    let index = data.findIndex(entry => entry.circuit === item.circuit)
-    if (timesRegex.test(item.inputValue)) {
-      data[index].user = item.inputValue
-      circuitData.set([...data])
-    }
-    else {
-      document.getElementById(item.circuit).value = data[index].user
-      console.log("error")
-    }
-  })
-  inputArr.set([])
-  console.log($circuitData)
+function circuitRating(circuit) {
+  let entry = $circuitEval.filter(item => item.circuit === circuit)
+  return entry[0].rating
 }
 
 // Insert "rank" at end of name (single name) or before surname
@@ -53,16 +36,16 @@ let userTitle = ""
 const surnameRegex = /(\s+[\w-]+)$/g
 
 if (!surnameRegex.test($name)) {
-  userTitle = `${$name} "${$rank}"`
+  userTitle = `${$name} "${$driverRating.rank}"`
 } else {
-  userTitle = $name.replace(surnameRegex, ` "${$rank}" ${$name.match(surnameRegex)}`)
+  userTitle = $name.replace(surnameRegex, ` "${$driverRating.rank}" ${$name.match(surnameRegex)}`)
 }
-
 </script>
 
 <div style="text-align:center">
 <h2>{userTitle}</h2>
-<button on:click|preventDefault={() => saveTimes()}>Save</button>
+<SaveButton />
+
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -85,17 +68,13 @@ if (!surnameRegex.test($name)) {
   <div class="user-time">
     <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
   </div>
-  <p>Silver</p>
+  <p>{circuitRating(entry.circuit)}</p>
 </div>
 {/each}
 
 <style>
   h2 {
     color: white
-  }
-  button {
-    margin: auto;
-    padding: 5px 10px;
   }
   .my-times {
     box-sizing: border-box;
