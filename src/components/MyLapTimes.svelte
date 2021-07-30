@@ -1,4 +1,5 @@
 <script>
+
 import { name, circuitData, inputArr } from '../stores/UserStore.js'
 import { circuitEval, driverRating } from '../stores/DerivedStore.js'
 import SaveButton from './SaveButton.svelte'
@@ -39,12 +40,12 @@ if (!surnameRegex.test($name)) {
 } else {
   userTitle = $name.replace(surnameRegex, ` "${$driverRating.rank}" ${$name.match(surnameRegex)}`)
 }
-
 </script>
 
 <div style="text-align:center">
 <h2>{userTitle}</h2>
 <SaveButton />
+
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -54,6 +55,10 @@ if (!surnameRegex.test($name)) {
   <p>TIME</p>
   <p>RATING</p>
 </div>
+
+<!-- input checks for user entered lap times in format m:ss.xxx with minimum of 1 decimal place entered. -->
+<!-- note - preferred regex of ... \.[0-9]{1,3} not working as expected   pattern="[0-3]:[0-5][0-9]\.[0-9][0-9][0-9]" -->
+<!-- test div -->
 
 {#each $circuitData as entry}
 <div class="my-times">
