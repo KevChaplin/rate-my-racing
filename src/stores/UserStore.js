@@ -6,21 +6,6 @@ export const nationality = writable('British')
 export const inputArr = writable([
 ])
 
-export const testTimeData = writable([
-  {
-    circuit: "Imola",
-    time: "1:59.233"
-  },
-  {
-    circuit: "Monaco",
-    time: "1:48.102"
-  }
-])
-
-export const inputArr = writable([
-
-])
-
 export const circuitData = writable([
   {
     id: 1,
