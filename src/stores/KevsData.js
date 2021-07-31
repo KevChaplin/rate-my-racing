@@ -1,24 +1,4 @@
-import { writable } from 'svelte/store'
-
-let defaultUser = {
-  name: "",
-  nationality: ""
-}
-
-// Get user data from local storage. If none, set to defaultUser.
-// Crate store: user, to store user information.
-// Subscribe to user so that changes to user are saved to local storage.
-let userStorage = localStorage.getItem("user")
-export let user = writable(JSON.parse(userStorage) || defaultUser)
-user.subscribe(val => {
-  localStorage.setItem("user", JSON.stringify(val))
-})
-
-// store: inputArr is array of data input by user on MyLapTimes component. Data is stored here before being checked for correct format (m:ss.xxx)
-export const inputArr = writable([
-])
-
-let defaultData = [
+const kevsCircuitData = [
   {
     id: 1,
     circuit: "Barcelona",
@@ -155,12 +135,3 @@ let defaultData = [
     user: "1:29.332"
   },
 ]
-
-// Get data from local storage. If none, set to defaultData.
-// Crate store: circuitData, to store all data on citcuits.
-// Subscribe to circuitData so that changes are saved to local storage.
-let dataStorage = localStorage.getItem("circuitData")
-export let circuitData = writable(JSON.parse(dataStorage) || [...defaultData])
-circuitData.subscribe(val => {
-  localStorage.setItem("circuitData", JSON.stringify(val))
-})

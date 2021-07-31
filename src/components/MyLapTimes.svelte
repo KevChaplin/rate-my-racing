@@ -1,6 +1,6 @@
 <script>
 
-import { name, circuitData, inputArr } from '../stores/UserStore.js'
+import { user, circuitData, inputArr } from '../stores/UserStore.js'
 import { circuitEval, driverRating } from '../stores/DerivedStore.js'
 import SaveButton from './SaveButton.svelte'
 
@@ -35,10 +35,10 @@ function circuitRating(circuit) {
 let userTitle = ""
 const surnameRegex = /(\s+[\w-]+)$/g
 
-if (!surnameRegex.test($name)) {
-  userTitle = `${$name} "${$driverRating.rank}"`
+if (!surnameRegex.test($user.name)) {
+  userTitle = `${$user.name} "${$driverRating.rank}"`
 } else {
-  userTitle = $name.replace(surnameRegex, ` "${$driverRating.rank}" ${$name.match(surnameRegex)}`)
+  userTitle = $user.name.replace(surnameRegex, ` "${$driverRating.rank}" ${$user.name.match(surnameRegex)}`)
 }
 </script>
 
