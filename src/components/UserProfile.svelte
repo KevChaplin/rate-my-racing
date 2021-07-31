@@ -1,22 +1,40 @@
 <script>
-  import { name, nationality } from '../stores/UserStore.js'
-  import { driverRating } from '../stores/DerivedStore.js'
+  import { user } from '../stores/UserStore.js'
+  import { driverRating , circuitEval } from '../stores/DerivedStore.js'
+
+  //find weakest circuit (user time minus platinum time is highest)
+  //find strongest circuit (user time minus platinum time is lowest)
+  let weakest = ""
+  let strongest = ""
+  let maxDelta
+  let minDelta
+  $circuitEval.forEach(item => {
+    if (item.platinumDelta) {
+      if ( !maxDelta || item.platinumDelta > maxDelta ) {
+        maxDelta = item.platinumDelta
+        weakest = item.circuit
+      } else if ( !minDelta || item.platinumDelta < minDelta ) {
+        minDelta = item.platinumDelta
+        strongest = item.circuit
+      }
+    }
+  })
 </script>
 
 <h2>User Profile</h2>
 <div class="profile">
   <p class="text-left">Name:</p>
-  <input placeholder="Lewis Hamilton" bind:value={$name}>
+  <input placeholder="Enter Name" bind:value={$user.name}>
   <p class="text-left">Nationality:</p>
-  <input placeholder="British" bind:value={$nationality}>
+  <input placeholder="Enter Nationality" bind:value={$user.nationality}>
   <p class="text-left">Rating:</p>
   <p class="text-right">{$driverRating.rating}</p>
   <p class="text-left">Rank:</p>
   <p class="text-right">{`"${$driverRating.rank}"`}</p>
   <p class="text-left">Strongest Track:</p>
-  <p class="text-right">Barcelona</p>
+  <p class="text-right">{strongest}</p>
   <p class="text-left">Weakest Track:</p>
-  <p class="text-right">Paul Ricard</p>
+  <p class="text-right">{weakest}</p>
 </div>
 
 <style>
