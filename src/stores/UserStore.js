@@ -9,6 +9,7 @@ let defaultUser = {
 // Crate store: user, to store user information.
 // Subscribe to user so that changes to user are saved to local storage.
 let userStorage = localStorage.getItem("user")
+
 export let user = writable(JSON.parse(userStorage) || defaultUser)
 user.subscribe(val => {
   localStorage.setItem("user", JSON.stringify(val))

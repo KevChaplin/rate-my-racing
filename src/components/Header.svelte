@@ -1,11 +1,16 @@
 <script>
+import quotes from '../stores/quotes.js'
+
+let quoteIndex = Math.floor(Math.random() * quotes.length)
+let quote = `"${quotes[quoteIndex].quote}"`
+let author = `- ${quotes[quoteIndex].author}`
 
 </script>
 
 <header>
 	<h1>RATE MY RACING</h1>
   <h4>for Assetto Corsa Competizione</h4>
-	<p><em>"What’s behind you doesn’t matter"</em><br>— Enzo Ferrari</p>
+	<p><em>{quote}</em><br>{author}</p>
 </header>
 
 <style>

@@ -92,7 +92,7 @@ const quotes = [
     author: "Juan Fangioi"
   },
   {
-    quote: "Sometimes you have to bring back only the steering wheel so the car owner will know that you’re giving it all you have. – Mario Andretti",
+    quote: "Sometimes you have to bring back only the steering wheel so the car owner will know that you’re giving it all you have.",
     author: "Mario Andretti"
   },
   {
@@ -100,3 +100,5 @@ const quotes = [
     author: "Colin Mcrae"
   },
 ]
+
+export default quotes
