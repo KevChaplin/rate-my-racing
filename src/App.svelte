@@ -3,10 +3,11 @@
 	import UserProfile from './components/UserProfile.svelte'
 	import MyLapTimes from './components/MyLapTimes.svelte'
 	import ReferenceTimes from './components/ReferenceTimes.svelte'
+	import PaceCalculator from './components/PaceCalculator.svelte'
 	import Tabs from './shared/Tabs.svelte'
 
 	//tabs
-	let items = ["User Profile", "My Lap Times", "Reference Times"]
+	let items = ["User Profile", "My Lap Times", "Reference Times", "Pace Calculator"]
 	let activeItem = "User Profile"
 	const tabChange = (e) => {
 		activeItem = e.detail
@@ -22,6 +23,8 @@
 		<MyLapTimes />
 	{:else if activeItem === "Reference Times"}
 		<ReferenceTimes />
+	{:else if activeItem === "Pace Calculator"}
+		<PaceCalculator />
 	{/if}
 </main>
 
