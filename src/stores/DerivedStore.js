@@ -1,6 +1,6 @@
 import { readable, writable, derived } from 'svelte/store'
-import convertTime from '../components/convertTime.js'
-import { circuitData } from '../stores/UserStore.js'
+import convertTime from '../shared/convertTime.js'
+import { user, circuitData } from '../stores/UserStore.js'
 
 const userRanks = [
   "Which one's the brake pedal?",
@@ -20,14 +20,14 @@ const userRanks = [
   "Alien"
 ]
 
-// Evaluate each circuit's user time and return rating and delta (difference from platimum time) for finding best and worst circuit.
+// Evaluate each circuit's user time and return rating and delta (proportinal difference from platimum time) for finding best and worst circuit.
 export const circuitEval = derived(circuitData, ($circuitData) => {
   let arr = []
   $circuitData.forEach(item => arr = [...arr,
     {
       circuit: item.circuit,
       userTime: convertTime(item.user),
-      platinumDelta: item.user !== "0:00.000" ? convertTime(item.user) - convertTime(item.platinum) : "N/A",
+      platinumDelta: item.user !== "0:00.000" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "N/A",
       rating: item.user === "0:00.000" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
               : convertTime(item.user) > convertTime(item.gold) ? "Silver"
               : convertTime(item.user) > convertTime(item.platinum) ? "Gold"
@@ -66,4 +66,17 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
     rating: rating,
     rank: rank
   }
+})
+
+// Insert "rank" at end of name (single name) or before surname to create a userTitle
+export const userTitle = derived([user, driverRating], ([$user, $driverRating]) => {
+  let userTitle = ""
+  const surnameRegex = /(\s+[\w-]+)$/g
+
+  if (!surnameRegex.test($user.name)) {
+    userTitle = `${$user.name} "${$driverRating.rank}"`
+  } else {
+    userTitle = $user.name.replace(surnameRegex, ` "${$driverRating.rank}" ${$user.name.match(surnameRegex)}`)
+  }
+  return userTitle
 })

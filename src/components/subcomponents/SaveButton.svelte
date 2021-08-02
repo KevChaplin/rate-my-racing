@@ -1,6 +1,6 @@
 <script>
-  import { circuitData } from '../stores/UserStore.js'
-  import { inputArr } from '../stores/UserStore.js'
+  import { circuitData } from '../../stores/UserStore.js'
+  import { inputArr } from '../../stores/UserStore.js'
 
 // User entered values (store:inputArr) values are checked for format m:ss:xxx.
 // if valid, relevent user times (store:circuitData) is updated.

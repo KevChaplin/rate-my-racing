@@ -8,6 +8,7 @@
   let strongest = ""
   let maxDelta
   let minDelta
+
   $circuitEval.forEach(item => {
     if (item.platinumDelta) {
       if ( !maxDelta || item.platinumDelta > maxDelta ) {
