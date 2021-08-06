@@ -2,10 +2,11 @@
   import { circuitData } from '../../stores/UserStore.js'
   import { inputArr } from '../../stores/UserStore.js'
 
+// -- Button to validate and update user laptimes --
 // User entered values (store:inputArr) values are checked for format m:ss:xxx.
 // if valid, relevent user times (store:circuitData) is updated.
 // if not valid, input value reset to value stored in store:circuitData. Error message.
-// finally inputArr is reset to blank array.
+// finally inputArr is reset to empty array.
   function saveTimes() {
     const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
     let data = [...$circuitData]

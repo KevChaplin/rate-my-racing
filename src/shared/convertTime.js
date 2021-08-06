@@ -1,5 +1,5 @@
 // receive time (string) and return time in milliseconds (number)
-function strToTime(timeStr) {
+function strToMill(timeStr) {
   let min = parseInt(timeStr.substring(0,1))
   let sec = parseInt(timeStr.substring(2,4))
   let mil = parseInt(timeStr.substring(5))
@@ -9,7 +9,7 @@ function strToTime(timeStr) {
 
 // receive time (in milliseconds) and return time as a string (m:ss.xxx)
 // leading zeros added where needed to maintain format
-function timeToStr(timeVal) {
+function millToStr(timeVal) {
   let min = Math.floor(timeVal / 60000)
   let sec = Math.floor((timeVal - ( 60000 * min )) / 1000)
   if (sec < 10) { sec = `0${sec}`}
@@ -24,9 +24,9 @@ function timeToStr(timeVal) {
 
 function convertTime(time) {
   if ( typeof time === 'string') {
-    return strToTime(time)
+    return strToMill(time)
   } else if ( typeof time === 'number') {
-    return timeToStr(time)
+    return millToStr(time)
   }
 }
 
