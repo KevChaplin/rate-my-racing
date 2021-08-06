@@ -1,15 +1,11 @@
 <script>
-
 import { user, circuitData, inputArr } from '../stores/UserStore.js'
-import { circuitEval, driverRating } from '../stores/DerivedStore.js'
-import SaveButton from './SaveButton.svelte'
+import { circuitEval, driverRating, userTitle } from '../stores/DerivedStore.js'
+import SaveButton from './subcomponents/SaveButton.svelte'
 
-//  LOGICAL FLOW:
-// --> User enters lap time (input)
-// --> Array of input lap times (store: inputArr) is updated.
-// --> Update data button triggers check. Each entry in (inputArr) is checked for validity based on required format (m:ss:xxx)
-// --> For each entry that is valid, array of user times (store: XXXXXX) is updated.
-// --> For invalid entries, that entry's value is reset to the value recorder in (store: XXXX)
+// -- Record of users lap times and ratings at all circuits --
+// User enters lap time (input elements)
+// Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
 // Any changed input value is added to array, overwriting any already input values for same circuits.
@@ -26,26 +22,16 @@ function inputChange(e) {
   inputArr.set([...newArr])
 }
 
+// Retrieve circuit rating for each circuit from derived store
 function circuitRating(circuit) {
   let entry = $circuitEval.filter(item => item.circuit === circuit)
   return entry[0].rating
 }
-
-// Insert "rank" at end of name (single name) or before surname
-let userTitle = ""
-const surnameRegex = /(\s+[\w-]+)$/g
-
-if (!surnameRegex.test($user.name)) {
-  userTitle = `${$user.name} "${$driverRating.rank}"`
-} else {
-  userTitle = $user.name.replace(surnameRegex, ` "${$driverRating.rank}" ${$user.name.match(surnameRegex)}`)
-}
 </script>
 
 <div style="text-align:center">
-<h2>{userTitle}</h2>
-<SaveButton />
-
+  <h2>{$userTitle}</h2>
+  <SaveButton />
 </div>
 
 <div class="my-times" style="font-weight:bold">
@@ -55,10 +41,6 @@ if (!surnameRegex.test($user.name)) {
   <p>TIME</p>
   <p>RATING</p>
 </div>
-
-<!-- input checks for user entered lap times in format m:ss.xxx with minimum of 1 decimal place entered. -->
-<!-- note - preferred regex of ... \.[0-9]{1,3} not working as expected   pattern="[0-3]:[0-5][0-9]\.[0-9][0-9][0-9]" -->
-<!-- test div -->
 
 {#each $circuitData as entry}
 <div class="my-times">
