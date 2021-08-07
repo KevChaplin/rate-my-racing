@@ -5,7 +5,9 @@ html, body {
 body {
 	width: 100vw;
 	height: 100vh;
-	background-color: gray;
+	background-color: black;
+	background: url("images/bentleys_racing.jpg") no-repeat center;
+	background-size: cover;
 	color: #333;
 	margin: 0;
 	padding: none;

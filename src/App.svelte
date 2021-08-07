@@ -6,7 +6,7 @@
 	import PaceCalculator from './components/PaceCalculator.svelte'
 	import Tabs from './shared/Tabs.svelte'
 
-	//tabs
+// Tabs
 	let items = ["User Profile", "My Lap Times", "Reference Times", "Pace Calculator"]
 	let activeItem = "User Profile"
 	const tabChange = (e) => {
@@ -27,7 +27,6 @@
 		<PaceCalculator />
 	{/if}
 </main>
-
 
 <style>
 
