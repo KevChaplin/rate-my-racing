@@ -1,16 +1,19 @@
 <script>
 import quotes from '../stores/quotes.js'
+import { fade } from 'svelte/transition'
 
 let quoteIndex = Math.floor(Math.random() * quotes.length)
 let quote = `"${quotes[quoteIndex].quote}"`
 let author = `- ${quotes[quoteIndex].author}`
+
+
 
 </script>
 
 <header>
 	<h1>RATE MY RACING</h1>
   <h4>- for Assetto Corsa Competizione -</h4>
-	<p><em>{quote}</em><br>{author}</p>
+	<p transition:fade="{{ duration: 2000 }}"><em>{quote}</em><br>{author}</p>
 </header>
 
 <style>
@@ -24,12 +27,26 @@ let author = `- ${quotes[quoteIndex].author}`
 	}
 
   h1 {
+		font-family: 'Fugaz One', cursive;
     font-size: 36px;
     font-weight: bold;
 		margin: 16px 0 8px 0;
-    padding: 0;
+    padding: 0 10px;
   }
 	h4 {
 		margin: 8px 0 16px 0;
+		padding: 0 10px;
+	}
+	p {
+		padding: 0 10px;
+	}
+
+	@media only screen and (min-width: 600px) {
+		h1 {
+			font-size: 48px;
+		}
+		h4 {
+			font-size: 24px;
+		}
 	}
 </style>
