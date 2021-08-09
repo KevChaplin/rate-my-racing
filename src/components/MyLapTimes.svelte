@@ -46,7 +46,7 @@ function circuitRating(circuit) {
       <td>
         <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
       </td>
-      <td>{circuitRating(entry.circuit)}</td>
+      <td value={circuitRating(entry.circuit)}>{circuitRating(entry.circuit)}</td>
     </tr>
     {/each}
   </table>
@@ -56,36 +56,46 @@ function circuitRating(circuit) {
   .container {
     text-align: center;
     width: 100%;
+    margin: 10px auto 0;
   }
-
-    table {
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
-      table-layout: auto;
-      width: 100%;
-      border: none;
-      margin-top: 8px;
-      border-spacing: 0;
-    }
-    td {
-      margin: 0;
-      width: 25%;
-      border: none;
-      font-size: 14px;
-    }
-
-    th, td {
-      border-bottom: 1px solid black;
-      overflow: hidden;
-    }
-    th {
-      padding: 10px 0;
-    }
-
+  table {
+    table-layout: auto;
+    width: 100%;
+    border: none;
+    margin-top: 8px;
+    border-spacing: 0 5px;
+  }
+  td {
+    margin: 0;
+    padding: 6px 0px;
+    width: 25%;
+    border: none;
+    font-size: 14px;
+  }
+  td[value="Platinum"] {
+    background: linear-gradient(330deg, #555564, #ffffff, #dedeff);
+  }
+  td[value="Gold"] {
+    background: linear-gradient(330deg, #8f6B29, #FDE08D, #DF9F28);
+  }
+  td[value="Silver"] {
+    background: linear-gradient(330deg, #454545, #cccccc, #d9d9d9);
+  }
+  td[value="Bronze"] {
+    background: linear-gradient(330deg, #732100, #a14521, #ffdeca, #ca7345);
+  }
+  th, td {
+    background-color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+  }
+  th {
+    padding: 10px 0;
+  }
   input {
     height: 100%;
     width: 80px;
     margin: 0;
+    padding: 0;
     background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
   }
@@ -93,7 +103,6 @@ function circuitRating(circuit) {
   @media only screen and (min-width: 600px) {
     .container {
       width: 600px;
-      margin: 10px auto 0;
     }
     td {
       font-size: 16px;

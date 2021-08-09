@@ -3,42 +3,73 @@
   import { fade } from 'svelte/transition';
 </script>
 
-<div in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
-  <div class="my-times" style="font-weight:bold">
-    <p class="entry">CIRCUIT</p>
-    <p class="entry">PLAT.</p>
-    <p class="entry">GOLD</p>
-    <p class="entry">SILV.</p>
-    <p class="entry">BRON.</p>
-  </div>
+<div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
+  <table>
+    <tr>
+      <th>CIRCUIT</th>
+      <th class="platinum">PLATINUM</th>
+      <th class="gold">GOLD</th>
+      <th class="silver">SILVER</th>
+      <th class="bronze">BRONZE</th>
+    </tr>
 
-  {#each $circuitData as entry}
-  <div class="my-times">
-    <p class="entry">{entry.circuit}</p>
-    <p class="entry">{entry.platinum}</p>
-    <p class="entry">{entry.gold}</p>
-    <p class="entry">{entry.silver}</p>
-    <p class="entry">{`${entry.silver}+`}</p>
-  </div>
-  {/each}
+    {#each $circuitData as entry}
+    <tr>
+      <td>{entry.circuit}</td>
+      <td>{entry.platinum.substring(0,6)}</td>
+      <td>{entry.gold.substring(0,6)}</td>
+      <td>{entry.silver.substring(0,6)}</td>
+      <td>{`${entry.silver.substring(0,6)}+`}</td>
+    </tr>
+    {/each}
+  </table>
 </div>
 
 <style>
-  .my-times {
-    box-sizing: border-box;
+  .container {
+    text-align: center;
     width: 100%;
-    background-color: black;
-    border: 2px solid black;
-    margin: 10px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 2px;
   }
-  .entry {
-    padding: 5px 2px;
+  table {
+    table-layout: auto;
+    width: 100%;
+    border: none;
+    border-spacing: 0 5px;
+  }
+  td {
     margin: 0;
-    background-color: white;
+    padding: 6px 0px;
+    width: 20%;
+    border: none;
     font-size: 14px;
-    text-align: center
+  }
+  th, td {
+    background-color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+  }
+  th {
+    padding: 10px 0;
+  }
+  .platinum {
+    background: linear-gradient(330deg, #555564, #ffffff, #dedeff);
+  }
+  .gold {
+    background: linear-gradient(330deg, #8f6B29, #FDE08D, #DF9F28);
+  }
+  .silver {
+    background: linear-gradient(330deg, #454545, #cccccc, #d9d9d9);
+  }
+  .bronze {
+    background: linear-gradient(330deg, #732100, #a14521, #ffdeca, #ca7345);
+  }
+
+  @media only screen and (min-width: 600px) {
+    .container {
+      width: 600px;
+      margin: 10px auto 0;
+    }
+    td {
+      font-size: 16px;
+    }
   }
 </style>

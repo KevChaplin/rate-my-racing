@@ -51,7 +51,6 @@
   .contents {
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
     padding: 15px 15px;
     margin-top: 15px;
   }
@@ -97,6 +96,9 @@
   }
 
   @media only screen and (min-width: 600px) {
+		.contents {
+			border-radius: 10px;
+		}
     h2 {
       font-size: 36px;
     }

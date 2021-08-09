@@ -25,11 +25,14 @@
       }
     })
     inputArr.set([])
-    let alertStr = `
-      ${validEntries} updated,
-      ${invalidEntries.length} invalid - ${invalidEntries.join(', ')}
-      Please use format m:ss.xxx
-      `
+    // Alert user of valid and invalid entries
+    let validStr = `${validEntries} lap times updated`
+    let invalidStr = invalidEntries.length > 0 ? `${invalidEntries.length} lap times invalid - ${invalidEntries.join(', ')}` : "";
+    let adviceStr = invalidEntries.length > 0 ? "Please enter lap times in format m:ss.xxx" : "";
+    let alertStr =
+      `${validStr}
+      ${invalidStr}
+      ${adviceStr}`
     alert(alertStr)
   }
 </script>
@@ -42,11 +45,13 @@
     padding: 5px 10px;
     border-radius: 5px;
     border: 2px black;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 0, 0, 0.7);
+    color: rgba(255, 255, 255, 0.7);
     font-weight: bold;
   }
   button:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 0, 0, 0.7);
   }
 </style>
