@@ -1,4 +1,5 @@
 <script>
+import { fade } from 'svelte/transition';
 import { user, circuitData, inputArr } from '../stores/UserStore.js'
 import { circuitEval, driverRating, userTitle } from '../stores/DerivedStore.js'
 import SaveButton from './subcomponents/SaveButton.svelte'
@@ -29,59 +30,73 @@ function circuitRating(circuit) {
 }
 </script>
 
-<div style="text-align:center">
-  <h2>{$userTitle}</h2>
+<div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
   <SaveButton />
+  <table>
+    <tr>
+      <th>CIRCUIT</th>
+      <th>COUNTRY</th>
+      <th>TIME</th>
+      <th>RATING</th>
+    </tr>
+    {#each $circuitData as entry}
+    <tr>
+      <td>{entry.circuit}</td>
+      <td>{entry.location}</td>
+      <td>
+        <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
+      </td>
+      <td>{circuitRating(entry.circuit)}</td>
+    </tr>
+    {/each}
+  </table>
 </div>
-
-<div class="my-times" style="font-weight:bold">
-  <p>CIRCUIT</p>
-  <p>LOC.</p>
-  <p>DLC</p>
-  <p>TIME</p>
-  <p>RATING</p>
-</div>
-
-{#each $circuitData as entry}
-<div class="my-times">
-  <p>{entry.circuit}</p>
-  <p>{entry.location}</p>
-  <p>Base</p>
-  <div class="user-time">
-    <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
-  </div>
-  <p>{circuitRating(entry.circuit)}</p>
-</div>
-{/each}
 
 <style>
-  h2 {
-    color: white
-  }
-  .my-times {
-    box-sizing: border-box;
+  .container {
+    text-align: center;
     width: 100%;
-    background-color: black;
-    border: 2px solid black;
-    margin: 10px auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 2fr 2fr;
-    grid-column-gap: 2px;
   }
-  p {
-    padding: 10px 5px;
-    margin: 0;
-    background-color: white;
-    font-size: 14px;
-    text-align: center
-  }
-  .user-time {
-    background-color: #ffffb3;
-  }
+
+    table {
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      table-layout: auto;
+      width: 100%;
+      border: none;
+      margin-top: 8px;
+      border-spacing: 0;
+    }
+    td {
+      margin: 0;
+      width: 25%;
+      border: none;
+      font-size: 14px;
+    }
+
+    th, td {
+      border-bottom: 1px solid black;
+      overflow: hidden;
+    }
+    th {
+      padding: 10px 0;
+    }
+
   input {
     height: 100%;
-    width: 100%;
+    width: 80px;
     margin: 0;
+    background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .container {
+      width: 600px;
+      margin: 10px auto 0;
+    }
+    td {
+      font-size: 16px;
+    }
   }
 </style>

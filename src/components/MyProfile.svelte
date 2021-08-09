@@ -23,7 +23,7 @@
   })
 </script>
 
-<div class="container" transition:fade="{{delay: 250, duration: 300}}">
+<div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
   <div class="contents">
     <h2>{$userTitle}</h2>
     <div class="profile">
@@ -33,7 +33,7 @@
       <input placeholder="Enter Nationality" bind:value={$user.nationality}>
       <p class="text-left">Rating:</p>
       <p class="text-right">{$driverRating.rating}</p>
-      <p class="text-left">Rank:</p>
+      <p class="text-left">Nickname:</p>
       <p class="text-right">{`"${$driverRating.rank}"`}</p>
       <p class="text-left">Strongest Track:</p>
       <p class="text-right">{strongest}</p>
@@ -51,7 +51,7 @@
   .contents {
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 15px 15px;
     margin-top: 15px;
   }
@@ -96,4 +96,15 @@
     color: silver;
   }
 
+  @media only screen and (min-width: 600px) {
+    h2 {
+      font-size: 36px;
+    }
+    p, input {
+      font-size: 24px;
+    }
+    input {
+      width: 300px;
+    }
+  }
 </style>

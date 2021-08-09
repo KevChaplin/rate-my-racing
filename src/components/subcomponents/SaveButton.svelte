@@ -34,11 +34,19 @@
   }
 </script>
 
-<button on:click|preventDefault={() => saveTimes()}>Save</button>
+<button on:click|preventDefault={() => saveTimes()}>Update Records</button>
 
 <style>
   button {
     margin: auto;
     padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px black;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+  }
+  button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 </style>
