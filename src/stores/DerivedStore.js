@@ -20,7 +20,7 @@ const userRanks = [
   "Alien"
 ]
 
-// Evaluate each circuit's user time and return rating and delta (proportinal difference from platimum time) for finding best and worst circuit.
+// -- Evaluation of user lap times at each circuit (array of objects containing: circuit; user lap time; % difference from platinum time; and rating)
 export const circuitEval = derived(circuitData, ($circuitData) => {
   let arr = []
   $circuitData.forEach(item => arr = [...arr,
@@ -37,9 +37,9 @@ export const circuitEval = derived(circuitData, ($circuitData) => {
   return arr
 })
 
-// Return object of overall driver rating and driver rank
+// -- Overall driver rating and driver rank --
 export const driverRating = derived(circuitEval, ($circuitEval) => {
-  //Allocate points per rating per circuits. Find average accross all circuits to find overall driver rating.
+  //Allocate points per rating at each circuit. Find average accross all circuits to find overall driver rating.
   function points(rating) {
     return (
       rating === "Platinum" ? 3
@@ -56,18 +56,17 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
     : scoreAvg === 2 ? "Gold"
     : scoreAvg === 1 ? "Silver"
     : "Bronze"
-
   // Allocate userRanks over range of possible scores (set up in case number of tracks change)
   let maxScore = $circuitEval.length * 3
   let ranksIndex = Math.round(scoreTotal / (maxScore / userRanks.length))
   let rank = userRanks[ranksIndex]
-
   return {
     rating: rating,
     rank: rank
   }
 })
 
+// -- User Title --
 // Insert "rank" at end of name (single name) or before surname to create a userTitle
 export const userTitle = derived([user, driverRating], ([$user, $driverRating]) => {
   let userTitle = ""

@@ -12,6 +12,9 @@
   }
 </script>
 
+<!-- For mobile screens, use sidebar nav element. Tab at top displays currently seleced tab. -->
+<!-- For tablet or larger screens, sidebar nav is hidden, all tabs shown at top and are selectable -->
+
 <!-- Tabs -->
 <div class="tabs" transition:fade="{{ delay: 2000, duration: 2000 }}">
   <img src="icons/menu_white_36dp.svg" alt="Menu" on:click={() => toggleNav()}>
