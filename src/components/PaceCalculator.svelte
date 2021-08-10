@@ -91,11 +91,11 @@
     {/if}
     {#if $newPace}
       <div>
-        <div style="pace">
+        <div>
           <p>New Pace:</p>
           <p>{$newPace}</p>
         </div>
-        <div style="pace">
+        <div>
           <p>Delta:</p>
           <p class="{/^-/.test($delta) ? 'delta-negative' : 'delta-positive'}">{$delta}</p>
         </div>
@@ -124,9 +124,6 @@
     text-align: center;
     width: 100%;
     color: black;
-  }
-  .pace {
-    background-color: rgba(255, 255, 255, 0.7);
   }
   p {
     display: inline-block;
