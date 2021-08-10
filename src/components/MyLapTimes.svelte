@@ -5,8 +5,8 @@ import { circuitEval, driverRating, userTitle } from '../stores/DerivedStore.js'
 import SaveButton from './subcomponents/SaveButton.svelte'
 
 // -- Record of users lap times and ratings at all circuits --
-// User enters lap time (input elements)
-// Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
+  // User enters lap time (input elements)
+  // Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
 // Any changed input value is added to array, overwriting any already input values for same circuits.
@@ -23,7 +23,7 @@ function inputChange(e) {
   inputArr.set([...newArr])
 }
 
-// Retrieve circuit rating for each circuit from derived store
+// Retrieve circuit rating for each circuit from store: DerivedStore
 function circuitRating(circuit) {
   let entry = $circuitEval.filter(item => item.circuit === circuit)
   return entry[0].rating

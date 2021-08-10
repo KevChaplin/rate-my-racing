@@ -3,6 +3,9 @@
   import { fade } from 'svelte/transition';
 </script>
 
+<!-- Table of reference lap times for each rating at each circuit -->
+<!-- Data in store: UserStore  -->
+
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
   <table>
     <tr>
@@ -13,6 +16,7 @@
       <th class="bronze">BRONZE</th>
     </tr>
 
+    <!--  Note: all app circuit times stored in m:ss.xxx format, however times displayed here as m:ss.x for simplicity (no rounding needed based on data) -->
     {#each $circuitData as entry}
     <tr>
       <td>{entry.circuit}</td>

@@ -1,5 +1,6 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
+  import { fade } from 'svelte/transition';
   import { circuitData } from '../stores/UserStore.js'
   import { paceTimes, newPace, delta } from '../stores/PaceStore.js'
   import convertTime from '../shared/convertTime.js'
@@ -74,7 +75,7 @@
   }
 </script>
 
-<div class="container">
+<div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
   <div>
     <select name="circuit" id="circuit" bind:value={currentCircuit} on:change="{() => getTime(currentCircuit)}">
       <option value="">--Select Circuit--</option>
@@ -90,11 +91,11 @@
     {/if}
     {#if $newPace}
       <div>
-        <div>
+        <div style="pace">
           <p>New Pace:</p>
           <p>{$newPace}</p>
         </div>
-        <div>
+        <div style="pace">
           <p>Delta:</p>
           <p class="{/^-/.test($delta) ? 'delta-negative' : 'delta-positive'}">{$delta}</p>
         </div>
@@ -111,7 +112,7 @@
   </div>
   <div>
     <button id="addBtn" on:click={addEntry}>Add Lap</button>
-    <button on:click={deleteEntry}>Delete Last</button>
+    <button id="deleteBtn" on:click={deleteEntry}>Delete Last</button>
     <CalculatePaceButton currentPace={currentPace} currentCircuit={currentCircuit} />
     <button on:click={updateRecords}>Update Records</button>
     <button on:click={reset}>Reset</button>
@@ -121,23 +122,34 @@
 <style>
   .container {
     text-align: center;
-    width: 100%
+    width: 100%;
+    color: black;
   }
-
+  .pace {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
   p {
-    color: white;
     display: inline-block;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+  }
+  input {
+    width: 80px;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  select {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .delta-positive {
     color: red;
     font-weight: bold;
-    text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 1px white;
   }
   .delta-negative {
     color: green;
     font-weight: bold;
-    text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 1px white;
   }
 
 </style>

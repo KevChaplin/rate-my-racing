@@ -6,8 +6,7 @@ let quoteIndex = Math.floor(Math.random() * quotes.length)
 let quote = `"${quotes[quoteIndex].quote}"`
 let author = `- ${quotes[quoteIndex].author}`
 
-
-
+// -- Header element displaying app title and random quote (taken from store: quotes) --
 </script>
 
 <header>

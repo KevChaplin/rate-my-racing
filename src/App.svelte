@@ -8,7 +8,7 @@
 
 // Tabs
 	let items = ["My Profile", "My Lap Times", "Reference Times", "Pace Calculator"]
-	let activeItem = "My Lap Times"
+	let activeItem = ""
 	const tabChange = (e) => {
 		activeItem = e.detail
 	}
