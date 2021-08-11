@@ -5,6 +5,7 @@
   import { paceTimes, newPace, delta } from '../stores/PaceStore.js'
   import convertTime from '../shared/convertTime.js'
   import CalculatePaceButton from './subcomponents/CalculatePaceButton.svelte'
+  import autoSeparator from '../shared/autoSeparator.js'
 
   // -- User selects circuit and enters one or more lap times.
   // Then can calculate average pace and delta compared to currrent pace at that circuit (if present).
@@ -62,7 +63,7 @@
     newPace.set("")
   }
 
-  // -- Update user laptimes --
+  // Update user laptimes
   // Firstly initiate click on CalculatePaceButton to generate up-to-date pace and also check for errors.
   // If newPace is set, update store: circuitData.user with newly calculated lap time. Then reset page.
   function updateRecords() {
@@ -104,9 +105,9 @@
   </div>
 
   <div id="lap-times" class="lap-times">
-    {#each $paceTimes as lap,i}
+    {#each $paceTimes as paceTime, i}
     <div>
-      <input id={`time${i}`} bind:value={lap} placeholder="0:00.000">
+      <input id={`time${i}`} bind:value={paceTime} placeholder="0:00.000" on:input={e => autoSeparator(e)}>
     </div>
     {/each}
   </div>

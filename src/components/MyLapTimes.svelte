@@ -3,6 +3,7 @@ import { fade } from 'svelte/transition';
 import { user, circuitData, inputArr } from '../stores/UserStore.js'
 import { circuitEval, driverRating, userTitle } from '../stores/DerivedStore.js'
 import SaveButton from './subcomponents/SaveButton.svelte'
+import autoSeparator from '../shared/autoSeparator.js'
 
 // -- Record of users lap times and ratings at all circuits --
   // User enters lap time (input elements)
@@ -44,7 +45,7 @@ function circuitRating(circuit) {
       <td>{entry.circuit}</td>
       <td>{entry.location}</td>
       <td>
-        <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
+        <input id={entry.circuit} type="text" value={entry.user} on:input={e => autoSeparator(e)} on:change={(e) => inputChange(e)}>
       </td>
       <td value={circuitRating(entry.circuit)}>{circuitRating(entry.circuit)}</td>
     </tr>
