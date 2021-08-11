@@ -50,7 +50,6 @@
   ul {
     display: flex;
     justify-content: center;
-
     margin: 0;
     padding: 8px 0px;
     list-style-type: none;

@@ -1,6 +1,5 @@
 # v0.9
 ## Still to come:
-- Revisit styling for mobile
 - Add share buttons, Twitter, Facebook
 - Reset to fresh user data values - check behaviour
 - Add credit to RCI on reference lap time page.

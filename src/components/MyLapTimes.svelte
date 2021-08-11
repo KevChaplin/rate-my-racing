@@ -63,7 +63,7 @@ function circuitRating(circuit) {
     table-layout: auto;
     width: 100%;
     border: none;
-    margin-top: 8px;
+    margin-top: 5px;
     border-spacing: 0 5px;
   }
   td {

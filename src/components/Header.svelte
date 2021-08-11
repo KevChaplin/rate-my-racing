@@ -20,7 +20,7 @@ let author = `- ${quotes[quoteIndex].author}`
 		background-color: red;
 		width: 100%;
 		text-align: center;
-		padding: 10px 0px;
+		padding: 5px 0px;
 		margin: 0px 0px;
 		color: white
 	}
@@ -29,23 +29,29 @@ let author = `- ${quotes[quoteIndex].author}`
 		font-family: 'Fugaz One', cursive;
     font-size: 36px;
     font-weight: bold;
-		margin: 16px 0 8px 0;
+		margin: 8px 0 6px 0;
     padding: 0 10px;
   }
 	h4 {
-		margin: 8px 0 16px 0;
+		margin: 6px 0 10px 0;
 		padding: 0 10px;
 	}
 	p {
 		padding: 0 10px;
+		margin: 5px 0;
 	}
 
 	@media only screen and (min-width: 600px) {
+		header {
+			padding: 10px 0;
+		}
 		h1 {
 			font-size: 48px;
+			margin: 16px 0 8px 0;
 		}
 		h4 {
 			font-size: 24px;
+			margin: 8px 0 16px 0;
 		}
 	}
 </style>

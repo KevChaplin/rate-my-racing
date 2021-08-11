@@ -54,12 +54,12 @@
   .contents {
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 15px 15px;
-    margin-top: 15px;
+    padding: 5px 5px;
+    /* margin-top: 15px; */
   }
   h2 {
     text-align: center;
-    margin: 10px;
+    margin: 5px;
     color: white;
   }
 	.Platinum {
@@ -92,19 +92,18 @@
     justify-content: center;
   }
   .text-left {
-    margin: 10px 0;
+    margin: 6px 0;
     text-align: right;
     padding-right: 5px
   }
   .text-right {
-    margin: 10px 0;
+    margin: 6px 0;
     text-align: left;
     padding-left: 5px
   }
   input {
     width: 150px;
     border: 0;
-    padding-left: 5px;
     margin: 0;
     color: white;
     background: none;
@@ -116,8 +115,11 @@
   @media only screen and (min-width: 600px) {
 		.contents {
 			border-radius: 10px;
+			margin-top: 15px;
+			padding: 15px 15px;
 		}
     h2 {
+			margin: 10px;
       font-size: 36px;
     }
     p, input {

@@ -35,7 +35,7 @@
     width: 100%;
   }
   table {
-    table-layout: auto;
+    table-layout: fixed;
     width: 100%;
     border: none;
     border-spacing: 0 5px;
@@ -52,7 +52,9 @@
     overflow: hidden;
   }
   th {
-    padding: 10px 0;
+    padding: 10px 2px;
+    width: 20%;
+    text-overflow: ellipsis;
   }
   .platinum {
     background: linear-gradient(330deg, #555564, #ffffff, #dedeff);

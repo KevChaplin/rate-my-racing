@@ -35,11 +35,11 @@ input, button, select, textarea {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
+	padding: 6px;
 	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
 	border: 1px solid #ccc;
-	border-radius: 2px;
+	border-radius: 4px;
 }
 
 input:disabled {
@@ -47,7 +47,7 @@ input:disabled {
 }
 
 button {
-	margin: auto;
+	margin: 3px 3px;
 	padding: 5px 10px;
 	border-radius: 5px;
 	border: 2px black;

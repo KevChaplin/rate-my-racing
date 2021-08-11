@@ -77,28 +77,28 @@
 </script>
 
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
-  <div>
     <select name="circuit" id="circuit" bind:value={currentCircuit} on:change="{() => getTime(currentCircuit)}">
       <option value="">--Select Circuit--</option>
       {#each $circuitData as entry}
       <option value={entry.circuit}>{entry.circuit}</option>
       {/each}
     </select>
+  <div class="records">
     {#if currentCircuit}
-      <div>
-        <p>Current recorded pace:</p>
-        <p>{currentPace}</p>
+      <div class="records-row">
+        <p class="text-left">Current Pace:</p>
+        <p class="text-right">{currentPace}</p>
       </div>
     {/if}
     {#if $newPace}
       <div>
-        <div>
-          <p>New Pace:</p>
-          <p>{$newPace}</p>
+        <div class="records-row">
+          <p class="text-left">New Pace:</p>
+          <p class="text-right">{$newPace}</p>
         </div>
-        <div>
-          <p>Delta:</p>
-          <p class="{/^-/.test($delta) ? 'delta-negative' : 'delta-positive'}">{$delta}</p>
+        <div class="records-row">
+          <p class="text-left">Delta:</p>
+          <p class="text-right {/^-/.test($delta) ? 'delta-negative' : 'delta-positive'}">{$delta}</p>
         </div>
       </div>
     {/if}
@@ -107,6 +107,7 @@
   <div id="lap-times" class="lap-times">
     {#each $paceTimes as paceTime, i}
     <div>
+      <p class="text-left">Lap {i+1}</p>
       <input id={`time${i}`} bind:value={paceTime} placeholder="0:00.000" on:input={e => autoSeparator(e)}>
     </div>
     {/each}
@@ -126,21 +127,35 @@
     width: 100%;
     color: black;
   }
+  .records {
+    margin: 0 auto;
+    width: 260px;
+  }
+  .records-row {
+    margin-bottom: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+  }
+  p, input, select {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
   p {
     display: inline-block;
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.7);
+    padding: 6px;
+    margin: 4px auto;
     border-radius: 4px;
   }
   input {
     width: 80px;
-    background-color: rgba(255, 255, 255, 0.7);
+    border: 0;
   }
   select {
     margin-top: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
   }
-
+  .lap-times {
+    margin-top: 16px;
+  }
   .delta-positive {
     color: red;
     font-weight: bold;
@@ -148,6 +163,22 @@
   .delta-negative {
     color: green;
     font-weight: bold;
+  }
+  .text-left {
+    margin: 0 6px 0 0;
+    text-align: right;
+    padding-right: 8px
+  }
+  .text-right {
+    margin: 0 0 0 6px;
+    text-align: left;
+    padding-left: 8px
+  }
+
+  @media only screen and (min-width: 600px) {
+    p {
+      margin: 8px auto;
+    }
   }
 
 </style>
