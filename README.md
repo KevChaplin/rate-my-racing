@@ -1,7 +1,7 @@
 # v0.9
 ## Still to come:
 - Add share buttons, Twitter, Facebook
-- Reset to fresh user data values - check behaviour
+- Reset to fresh user data values - fix strongest/weakest tracks
 - Add credit to RCI on reference lap time page.
 
 
@@ -25,6 +25,7 @@ App created to help Assetto Corsa Competizione sim racers with the following iss
 And of course for me, a chance to continue my web development studies in the pursuit of employment and improve my skills using the Svelte framework.
 
 ## Credits
+
 Lap times for each category per circuit taken from Race Club International. https://www.racingclubinternational.com/
 Currently awaiting feedback before project is made public.
 

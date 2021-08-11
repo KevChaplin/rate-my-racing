@@ -28,39 +28,77 @@
 </script>
 
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
-  <div class="contents">
-    <h2 class={$driverRating.rating}>{$userTitle}</h2>
-    <div class="profile">
-      <p class="text-left">Name:</p>
-      <input placeholder="Enter Name" bind:value={$user.name}>
-      <p class="text-left">Nationality:</p>
-      <input placeholder="Enter Nationality" bind:value={$user.nationality}>
-      <p class="text-left">Rating:</p>
-      <p class="text-right">{$driverRating.rating}</p>
-      <p class="text-left">Nickname:</p>
-      <p class="text-right">{`"${$driverRating.rank}"`}</p>
-      <p class="text-left">Strongest Track:</p>
-      <p class="text-right">{strongest}</p>
-      <p class="text-left">Weakest Track:</p>
-      <p class="text-right">{weakest}</p>
-    </div>
-  </div>
+	{#if $user.name}
+	<h2 class={$driverRating.rating}>{$userTitle}</h2>
+	{/if}
+	<table>
+		<tr>
+      <td class="left-text">Name:</td>
+			<td class="right-text">
+      	<input placeholder="Enter Name" bind:value={$user.name}>
+			</td>
+		</tr>
+		<tr>
+      <td class="left-text">Nationality:</td>
+			<td class="right-text">
+      	<input placeholder="Enter Nationality" bind:value={$user.nationality}>
+			</td>
+		</tr>
+		<tr>
+      <td class="left-text">Rating:</td>
+			<td class="right-text">{$driverRating.rating}</td>
+		</tr>
+		<tr>
+      <td class="left-text">Nickname:</td>
+      <td class="right-text">{!$driverRating.rank ? "none" : `"${$driverRating.rank}"`}</td>
+		</tr>
+		<tr>
+      <td class="left-text">Strongest Track:</td>
+      <td class="right-text">{strongest}</td>
+		</tr>
+		<tr>
+      <td class="left-text">Weakest Track:</td>
+      <td class="right-text">{weakest}</td>
+		</tr>
+  </table>
 </div>
 
 <style>
   .container {
     text-align: center;
   }
-  .contents {
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px 5px;
-    /* margin-top: 15px; */
+	h2 {
+		text-align: center;
+		margin: 4px 0 4px 0;
+		color: white;
+	}
+  table{
+		table-layout: auto;
+		margin: 0 auto;
+		border: none;
+    padding: 0;
+		color: white;
+    width: 100%;
+    border-spacing: 0 6px;
   }
-  h2 {
-    text-align: center;
-    margin: 5px;
+	td {
+		background-color: rgba(0, 0, 0, 0.7);
+		margin: 0;
+    padding: 8px 8px;
+    width: 50%;
+    border: none;
+	}
+	input {
+    width: 150px;
+    border: 0;
+		padding: 0;
+		margin: 6px 0;
     color: white;
+    background: none;
+		font-size: 18px;
+  }
+  ::placeholder {
+    color: silver;
   }
 	.Platinum {
 		background: linear-gradient(#555564, #ffffff, #dedeff, #b6b6fc);
@@ -82,47 +120,34 @@
 						-webkit-text-fill-color: transparent;
 						-webkit-background-clip: text;
 	}
-  .profile {
-    padding: 5px;
-    margin: 0;
-    color: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    justify-content: center;
-  }
-  .text-left {
-    margin: 6px 0;
+  .left-text {
     text-align: right;
-    padding-right: 5px
   }
-  .text-right {
-    margin: 6px 0;
+  .right-text {
     text-align: left;
-    padding-left: 5px
   }
   input {
     width: 150px;
     border: 0;
-    margin: 0;
+		padding: 0;
+		margin: 0;
     color: white;
     background: none;
   }
   ::placeholder {
-    color: silver;
+    color: #707070;
   }
 
   @media only screen and (min-width: 600px) {
-		.contents {
-			border-radius: 10px;
-			margin-top: 15px;
-			padding: 15px 15px;
+		table {
+			width: 600px;
+			border-spacing: 0 10px
 		}
     h2 {
-			margin: 10px;
+			margin: 10px 0 5px 0;
       font-size: 36px;
     }
-    p, input {
+    td, input {
       font-size: 24px;
     }
     input {

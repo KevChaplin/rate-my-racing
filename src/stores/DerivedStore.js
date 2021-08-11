@@ -3,16 +3,16 @@ import convertTime from '../shared/convertTime.js'
 import { user, circuitData } from '../stores/UserStore.js'
 
 const userRanks = [
-  "Which one's the brake pedal?",
-  "Why is this so difficult?",
-  "I'm going back to Gran Turismo",
-  "T1 Menace",
+  "Brakes?",
+  "Black Flag",
+  "Going back to Gran Turismo",
   "Mobile Chicane",
   "Captain Slow",
-  "What does that blue flag mean?",
+  "T1 Menace",
+  "Blue flag?",
   "Divebomb!",
   "Rage Quit",
-  "A little knowledge is a dangerous thing",
+  "Dangerous",
   "You shall not pass!",
   "Plz no Punterino!",
   "I am a driving god!",
@@ -27,8 +27,8 @@ export const circuitEval = derived(circuitData, ($circuitData) => {
     {
       circuit: item.circuit,
       userTime: convertTime(item.user),
-      platinumDelta: item.user !== "0:00.000" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "N/A",
-      rating: item.user === "0:00.000" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
+      platinumDelta: item.user !== "" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "N/A",
+      rating: item.user === "" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
               : convertTime(item.user) > convertTime(item.gold) ? "Silver"
               : convertTime(item.user) > convertTime(item.platinum) ? "Gold"
               : "Platinum"
@@ -57,9 +57,11 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
     : scoreAvg === 1 ? "Silver"
     : "Bronze"
   // Allocate userRanks over range of possible scores (set up in case number of tracks change)
+  let rank
   let maxScore = $circuitEval.length * 3
   let ranksIndex = Math.round(scoreTotal / (maxScore / userRanks.length))
-  let rank = userRanks[ranksIndex]
+  // If scoreTotal = 0, no rank (new user).
+  rank = scoreTotal === 0 ? "" : userRanks[ranksIndex]
   return {
     rating: rating,
     rank: rank
@@ -67,12 +69,15 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
 })
 
 // -- User Title --
-// Insert "rank" at end of name (single name) or before surname to create a userTitle
+// If user has no rank, title = user name.
+// Else, insert "rank" at end of name (single name) or before surname to create a userTitle
 export const userTitle = derived([user, driverRating], ([$user, $driverRating]) => {
   let userTitle = ""
   const surnameRegex = /(\s+[\w-]+)$/g
 
-  if (!surnameRegex.test($user.name)) {
+  if (!$driverRating.rank) {
+    userTitle = $user.name
+  } else if (!surnameRegex.test($user.name)) {
     userTitle = `${$user.name} "${$driverRating.rank}"`
   } else {
     userTitle = $user.name.replace(surnameRegex, ` "${$driverRating.rank}" ${$user.name.match(surnameRegex)}`)

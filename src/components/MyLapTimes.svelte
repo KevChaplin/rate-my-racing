@@ -45,7 +45,7 @@ function circuitRating(circuit) {
       <td>{entry.circuit}</td>
       <td>{entry.location}</td>
       <td>
-        <input id={entry.circuit} type="text" value={entry.user} on:input={e => autoSeparator(e)} on:change={(e) => inputChange(e)}>
+        <input id={entry.circuit} type="text" value={entry.user} placeholder="0:00.000" on:input={e => autoSeparator(e)} on:change={(e) => inputChange(e)}>
       </td>
       <td value={circuitRating(entry.circuit)}>{circuitRating(entry.circuit)}</td>
     </tr>

@@ -47,7 +47,7 @@
 
     // Calculate delta between new pace and current pace (if present) (newPace - circuitData.user).
     // If delta less than 10 seconds or one miunte, delta (string) is shortened to "s.xxx" or "ss.xxx" respectively.
-    if (currentPace !== "0:00.000") {
+    if (currentPace !== "") {
       deltaNum = paceNum - convertTime(currentPace)
       let deltaStr = ""
       if ( Math.abs(deltaNum) < 10000 ) {
