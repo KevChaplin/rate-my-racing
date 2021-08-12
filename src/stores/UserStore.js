@@ -27,7 +27,7 @@ let defaultData = [
     platinum: "1:44.500",
     gold: "1:45.900",
     silver: "1:47.900",
-    user: "1:45.249"
+    user: ""
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ let defaultData = [
     platinum: "2:02.500",
     gold: "2:03.900",
     silver: "2:05.900",
-    user: "2:04.288"
+    user: ""
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ let defaultData = [
     platinum: "1:24.000",
     gold: "1:25.400",
     silver: "1:26.900",
-    user: "1:24.911"
+    user: ""
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ let defaultData = [
     platinum: "1:44.500",
     gold: "1:45.900",
     silver: "1:47.400",
-    user: "1:46.272"
+    user: ""
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ let defaultData = [
     platinum: "1:42.000",
     gold: "1:43.400",
     silver: "1:45.400",
-    user: "1:44.041"
+    user: ""
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ let defaultData = [
     platinum: "1:23.500",
     gold: "1:24.900",
     silver: "1:26.400",
-    user: "1:23.815"
+    user: ""
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ let defaultData = [
     platinum: "1:34.500",
     gold: "1:35.900",
     silver: "1:37.400",
-    user: "1:35.913"
+    user: ""
   },
   {
     id: 8,
@@ -90,7 +90,7 @@ let defaultData = [
     platinum: "1:48.500",
     gold: "1:49.900",
     silver: "1:51.900",
-    user: "1:48.648"
+    user: ""
   },
   {
     id: 9,
@@ -99,7 +99,7 @@ let defaultData = [
     platinum: "1:55.000",
     gold: "1:56.400",
     silver: "1:57.900",
-    user: "1:55.688"
+    user: ""
   },
   {
     id: 10,
@@ -108,7 +108,7 @@ let defaultData = [
     platinum: "1:55.000",
     gold: "1:56.400",
     silver: "1:58.400",
-    user: "0:00.000"
+    user: ""
   },
   {
     id: 11,
@@ -117,7 +117,7 @@ let defaultData = [
     platinum: "1:59.500",
     gold: "2:00.900",
     silver: "2:02.400",
-    user: "1:59.713"
+    user: ""
   },
   {
     id: 12,
@@ -126,7 +126,7 @@ let defaultData = [
     platinum: "2:19.500",
     gold: "2:20.900",
     silver: "2:22.900",
-    user: "2:20.415"
+    user: ""
   },
   {
     id: 13,
@@ -135,7 +135,7 @@ let defaultData = [
     platinum: "2:01.000",
     gold: "2:02.400",
     silver: "2:04.400",
-    user: "2:03.451"
+    user: ""
   },
   {
     id: 14,
@@ -144,7 +144,7 @@ let defaultData = [
     platinum: "1:36.000",
     gold: "1:37.400",
     silver: "1:38.900",
-    user: "1:36.759"
+    user: ""
   },
   {
     id: 15,
@@ -153,7 +153,7 @@ let defaultData = [
     platinum: "1:29.000",
     gold: "1:30.400",
     silver: "1:31.900",
-    user: "1:29.332"
+    user: ""
   },
 ]
 

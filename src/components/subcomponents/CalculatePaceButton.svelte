@@ -6,17 +6,17 @@
   export let currentPace
   export let currentCircuit
 
-// -- Button to calculate lap pace and delta (difference from stored user lap time) at selected circuit --
-// Check if circuit is selected
-// User entered lap times (store:PaceStore) values checked for format m:ss:xxx.
-// If valid, average lap time given. Delta between new and current pace calculated (if current pace set).
-// If not valid, error message via alert.
-
+// -- Button to validate and calculate lap pace and delta (difference from stored user lap time) at selected circuit --
   function calculatePace() {
     let paceNum
     let deltaNum
 
-    // Validate entries
+    // Check and remove last entry if empty. (Empty entry automatically added if user presses return when entering data - for ease of data entry)
+    if ( ($paceTimes.length > 1) && ($paceTimes[$paceTimes.length - 1] === "") ) {
+      $paceTimes = [...$paceTimes.slice(0, -1)]
+    }
+
+    // Validate entries - user entered lap times (store: PaceStore, paceTimes) values checked for format m:ss:xxx
     const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
     let invalidEntries = 0
     $paceTimes.forEach(item => {
@@ -24,12 +24,15 @@
         invalidEntries++
       }
     })
-    // Alert string
+
+    // Alert string if invalid entries found
     let alertStr = `
       Invalid entries.
       Please use format m:ss.xxx
       `
-    // If circuit not selected or invalid entries present, show alert and reset newPace, else, calculate and set pace (store: newPace).
+
+    // If circuit not selected or invalid entries present, show alert and reset newPace
+    // Else, calculate and set pace (store: newPace).
     if (!currentCircuit) {
       alert("Select circuit")
       newPace.set("")
@@ -44,7 +47,7 @@
 
     // Calculate delta between new pace and current pace (if present) (newPace - circuitData.user).
     // If delta less than 10 seconds or one miunte, delta (string) is shortened to "s.xxx" or "ss.xxx" respectively.
-    if (currentPace !== "0:00.000") {
+    if (currentPace !== "") {
       deltaNum = paceNum - convertTime(currentPace)
       let deltaStr = ""
       if ( Math.abs(deltaNum) < 10000 ) {
@@ -63,11 +66,8 @@
   }
 </script>
 
-<button id="calcPaceBtn" on:click|preventDefault={() => calculatePace()}>Calculate Pace</button>
+<button id="calcPaceBtn" on:click={() => calculatePace()}>Calculate Pace</button>
 
 <style>
-  button {
-    margin: auto;
-    padding: 0.4em;
-  }
+
 </style>

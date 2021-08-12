@@ -3,16 +3,16 @@ import convertTime from '../shared/convertTime.js'
 import { user, circuitData } from '../stores/UserStore.js'
 
 const userRanks = [
-  "Which one's the brake pedal?",
-  "Why is this so difficult?",
-  "I'm going back to Gran Turismo",
-  "T1 Menace",
+  "Brakes?",
+  "Black Flag",
+  "Going back to Gran Turismo",
   "Mobile Chicane",
   "Captain Slow",
-  "What does that blue flag mean?",
+  "T1 Menace",
+  "Blue flag?",
   "Divebomb!",
   "Rage Quit",
-  "A little knowledge is a dangerous thing",
+  "Dangerous",
   "You shall not pass!",
   "Plz no Punterino!",
   "I am a driving god!",
@@ -20,15 +20,15 @@ const userRanks = [
   "Alien"
 ]
 
-// Evaluate each circuit's user time and return rating and delta (proportinal difference from platimum time) for finding best and worst circuit.
+// -- Evaluation of user lap times at each circuit (array of objects containing: circuit; user lap time; % difference from platinum time; and rating)
 export const circuitEval = derived(circuitData, ($circuitData) => {
   let arr = []
   $circuitData.forEach(item => arr = [...arr,
     {
       circuit: item.circuit,
       userTime: convertTime(item.user),
-      platinumDelta: item.user !== "0:00.000" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "N/A",
-      rating: item.user === "0:00.000" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
+      platinumDelta: item.user !== "" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "",
+      rating: item.user === "" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
               : convertTime(item.user) > convertTime(item.gold) ? "Silver"
               : convertTime(item.user) > convertTime(item.platinum) ? "Gold"
               : "Platinum"
@@ -37,9 +37,9 @@ export const circuitEval = derived(circuitData, ($circuitData) => {
   return arr
 })
 
-// Return object of overall driver rating and driver rank
+// -- Overall driver rating and driver rank --
 export const driverRating = derived(circuitEval, ($circuitEval) => {
-  //Allocate points per rating per circuits. Find average accross all circuits to find overall driver rating.
+  //Allocate points per rating at each circuit. Find average accross all circuits to find overall driver rating.
   function points(rating) {
     return (
       rating === "Platinum" ? 3
@@ -56,24 +56,28 @@ export const driverRating = derived(circuitEval, ($circuitEval) => {
     : scoreAvg === 2 ? "Gold"
     : scoreAvg === 1 ? "Silver"
     : "Bronze"
-
   // Allocate userRanks over range of possible scores (set up in case number of tracks change)
+  let rank
   let maxScore = $circuitEval.length * 3
   let ranksIndex = Math.round(scoreTotal / (maxScore / userRanks.length))
-  let rank = userRanks[ranksIndex]
-
+  // If scoreTotal = 0, no rank (new user).
+  rank = scoreTotal === 0 ? "" : userRanks[ranksIndex]
   return {
     rating: rating,
     rank: rank
   }
 })
 
-// Insert "rank" at end of name (single name) or before surname to create a userTitle
+// -- User Title --
+// If user has no rank, title = user name.
+// Else, insert "rank" at end of name (single name) or before surname to create a userTitle
 export const userTitle = derived([user, driverRating], ([$user, $driverRating]) => {
   let userTitle = ""
   const surnameRegex = /(\s+[\w-]+)$/g
 
-  if (!surnameRegex.test($user.name)) {
+  if (!$driverRating.rank) {
+    userTitle = $user.name
+  } else if (!surnameRegex.test($user.name)) {
     userTitle = `${$user.name} "${$driverRating.rank}"`
   } else {
     userTitle = $user.name.replace(surnameRegex, ` "${$driverRating.rank}" ${$user.name.match(surnameRegex)}`)

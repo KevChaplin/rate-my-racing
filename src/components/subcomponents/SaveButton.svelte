@@ -2,11 +2,12 @@
   import { circuitData } from '../../stores/UserStore.js'
   import { inputArr } from '../../stores/UserStore.js'
 
-// -- Button to validate and update user laptimes --
-// User entered values (store:inputArr) values are checked for format m:ss:xxx.
-// if valid, relevent user times (store:circuitData) is updated.
-// if not valid, input value reset to value stored in store:circuitData. Error message.
-// finally inputArr is reset to empty array.
+// -- Button to validate and update user laptimes (for My Lap Times tab) --
+
+  // User entered values (store:inputArr) values are checked for format m:ss:xxx.
+  // If valid, relevent user lap time (store:circuitData) is updated.
+  // If not valid, input value reset to value stored in store:circuitData. Error message.
+  // Finally inputArr is reset to empty array.
   function saveTimes() {
     const timesRegex = /^([0-3]:[0-5][0-9]\.[0-9]{3})$/
     let data = [...$circuitData]
@@ -25,20 +26,20 @@
       }
     })
     inputArr.set([])
-    let alertStr = `
-      ${validEntries} updated,
-      ${invalidEntries.length} invalid - ${invalidEntries.join(', ')}
-      Please use format m:ss.xxx
-      `
+    // Alert user of valid and invalid entries
+    let validStr = `${validEntries} lap times updated`
+    let invalidStr = invalidEntries.length > 0 ? `${invalidEntries.length} lap times invalid - ${invalidEntries.join(', ')}` : "";
+    let adviceStr = invalidEntries.length > 0 ? "Please enter lap times in format m:ss.xxx" : "";
+    let alertStr =
+      `${validStr}
+      ${invalidStr}
+      ${adviceStr}`
     alert(alertStr)
   }
 </script>
 
-<button on:click|preventDefault={() => saveTimes()}>Save</button>
+<button on:click|preventDefault={() => saveTimes()}>Update Records</button>
 
 <style>
-  button {
-    margin: auto;
-    padding: 5px 10px;
-  }
+
 </style>

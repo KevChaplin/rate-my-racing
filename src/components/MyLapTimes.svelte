@@ -1,11 +1,13 @@
 <script>
+import { fade } from 'svelte/transition';
 import { user, circuitData, inputArr } from '../stores/UserStore.js'
 import { circuitEval, driverRating, userTitle } from '../stores/DerivedStore.js'
 import SaveButton from './subcomponents/SaveButton.svelte'
+import autoSeparator from '../shared/autoSeparator.js'
 
 // -- Record of users lap times and ratings at all circuits --
-// User enters lap time (input elements)
-// Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
+  // User enters lap time (input elements)
+  // Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
 // Any changed input value is added to array, overwriting any already input values for same circuits.
@@ -22,66 +24,89 @@ function inputChange(e) {
   inputArr.set([...newArr])
 }
 
-// Retrieve circuit rating for each circuit from derived store
+// Retrieve circuit rating for each circuit from store: DerivedStore
 function circuitRating(circuit) {
   let entry = $circuitEval.filter(item => item.circuit === circuit)
   return entry[0].rating
 }
 </script>
 
-<div style="text-align:center">
-  <h2>{$userTitle}</h2>
+<div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
   <SaveButton />
+  <table>
+    <tr>
+      <th>CIRCUIT</th>
+      <th>COUNTRY</th>
+      <th>TIME</th>
+      <th>RATING</th>
+    </tr>
+    {#each $circuitData as entry}
+    <tr>
+      <td>{entry.circuit}</td>
+      <td>{entry.location}</td>
+      <td>
+        <input id={entry.circuit} type="text" value={entry.user} placeholder="0:00.000" on:input={e => autoSeparator(e)} on:change={(e) => inputChange(e)}>
+      </td>
+      <td value={circuitRating(entry.circuit)}>{circuitRating(entry.circuit)}</td>
+    </tr>
+    {/each}
+  </table>
 </div>
-
-<div class="my-times" style="font-weight:bold">
-  <p>CIRCUIT</p>
-  <p>LOC.</p>
-  <p>DLC</p>
-  <p>TIME</p>
-  <p>RATING</p>
-</div>
-
-{#each $circuitData as entry}
-<div class="my-times">
-  <p>{entry.circuit}</p>
-  <p>{entry.location}</p>
-  <p>Base</p>
-  <div class="user-time">
-    <input id={entry.circuit} type="text" value={entry.user} on:change={(e) => inputChange(e)}>
-  </div>
-  <p>{circuitRating(entry.circuit)}</p>
-</div>
-{/each}
 
 <style>
-  h2 {
-    color: white
-  }
-  .my-times {
-    box-sizing: border-box;
+  .container {
+    text-align: center;
     width: 100%;
-    background-color: black;
-    border: 2px solid black;
-    margin: 10px auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 2fr 2fr;
-    grid-column-gap: 2px;
+    margin: 10px auto 0;
   }
-  p {
-    padding: 10px 5px;
+  table {
+    table-layout: auto;
+    width: 100%;
+    border: none;
+    margin-top: 5px;
+    border-spacing: 0 5px;
+  }
+  td {
     margin: 0;
-    background-color: white;
+    padding: 6px 0px;
+    width: 25%;
+    border: none;
     font-size: 14px;
-    text-align: center
   }
-  .user-time {
-    background-color: #ffffb3;
+  td[value="Platinum"] {
+    background: linear-gradient(330deg, #555564, #ffffff, #dedeff);
+  }
+  td[value="Gold"] {
+    background: linear-gradient(330deg, #8f6B29, #FDE08D, #DF9F28);
+  }
+  td[value="Silver"] {
+    background: linear-gradient(330deg, #454545, #cccccc, #d9d9d9);
+  }
+  td[value="Bronze"] {
+    background: linear-gradient(330deg, #732100, #a14521, #ffdeca, #ca7345);
+  }
+  th, td {
+    background-color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+  }
+  th {
+    padding: 10px 0;
   }
   input {
     height: 100%;
-    width: 100%;
+    width: 80px;
     margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .container {
+      width: 600px;
+    }
+    td {
+      font-size: 16px;
+    }
   }
 </style>
