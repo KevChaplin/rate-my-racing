@@ -27,7 +27,7 @@ export const circuitEval = derived(circuitData, ($circuitData) => {
     {
       circuit: item.circuit,
       userTime: convertTime(item.user),
-      platinumDelta: item.user !== "" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "N/A",
+      platinumDelta: item.user !== "" ? (convertTime(item.user) - convertTime(item.platinum)) / convertTime(item.platinum) : "",
       rating: item.user === "" || convertTime(item.user) > convertTime(item.silver) ? "Bronze"
               : convertTime(item.user) > convertTime(item.gold) ? "Silver"
               : convertTime(item.user) > convertTime(item.platinum) ? "Gold"

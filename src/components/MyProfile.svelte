@@ -16,13 +16,13 @@
 	// Find strongest circuit (user time minus platinum time is lowest)
   $circuitEval.forEach(item => {
     if (item.platinumDelta) {
-      if ( !maxDelta || item.platinumDelta > maxDelta ) {
-        maxDelta = item.platinumDelta
-        weakest = item.circuit
-      } else if ( !minDelta || item.platinumDelta < minDelta ) {
+			if ( !maxDelta || item.platinumDelta > maxDelta ) {
+				maxDelta = item.platinumDelta
+				weakest = item.circuit
+			} else if ( !minDelta || item.platinumDelta < minDelta ) {
         minDelta = item.platinumDelta
         strongest = item.circuit
-      }
+			}
     }
   })
 </script>
@@ -80,6 +80,7 @@
 		color: white;
     width: 100%;
     border-spacing: 0 6px;
+		font-size: 14px;
   }
 	td {
 		background-color: rgba(0, 0, 0, 0.7);
@@ -95,7 +96,7 @@
 		margin: 6px 0;
     color: white;
     background: none;
-		font-size: 18px;
+		font-size: 14px;
   }
   ::placeholder {
     color: silver;

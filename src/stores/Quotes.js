@@ -48,10 +48,6 @@ const quotes = [
     author: "Ayrton Senna"
   },
   {
-    quote: "Motor racing can never be totally safe and it never should be in my opinion.",
-    author: "Murray Walker"
-  },
-  {
     quote: "Since I started in motor racing I've worked with people from all over the world. We are all here to go racing and prejudice will never play any part in that.",
     author: "Kimi Raikkonen"
   },
