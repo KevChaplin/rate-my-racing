@@ -1,9 +1,7 @@
 # v0.9
 ## Still to come:
 - Add share buttons, Twitter, Facebook
-- Reset to fresh user data values - fix strongest/weakest tracks
 - Add credit to RCI on reference lap time page.
-
 
 # Rate My Racing
 By Kevin Chaplin
@@ -26,8 +24,9 @@ And of course for me, a chance to continue my web development studies in the pur
 
 ## Credits
 
-Lap times for each category per circuit taken from Race Club International. https://www.racingclubinternational.com/
+- Lap times for each category per circuit taken from Race Club International. https://www.racingclubinternational.com/  
 Currently awaiting feedback before project is made public.
+- Tweet button and twitter image from Twitter. https://developer.twitter.com/en
 
 ## Wish-list
 

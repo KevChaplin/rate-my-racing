@@ -28,6 +28,7 @@ let author = `- ${quotes[quoteIndex].author}`
   h1 {
 		font-family: 'Fugaz One', cursive;
     font-size: 36px;
+		line-height: 1;
     font-weight: bold;
 		margin: 8px 0 6px 0;
     padding: 0 10px;

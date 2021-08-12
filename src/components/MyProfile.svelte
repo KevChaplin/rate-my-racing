@@ -25,6 +25,14 @@
 			}
     }
   })
+
+// -- Tweet Button --
+	// Create text for tweet
+	let tweetText =
+	`${$userTitle}
+${$driverRating.rating} rated driver
+Assetto Corsa Competizione`
+
 </script>
 
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
@@ -61,6 +69,14 @@
       <td class="right-text">{weakest}</td>
 		</tr>
   </table>
+	<a
+		class="twitter-share-button"
+		href="https://twitter.com/intent/tweet"
+		data-text={tweetText}
+		data-url="https://kevchaplin.github.io/rate-my-racing/"
+		data-show-count="false">
+	</a>
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 
 <style>
@@ -85,7 +101,7 @@
 	td {
 		background-color: rgba(0, 0, 0, 0.7);
 		margin: 0;
-    padding: 8px 8px;
+    padding: 6px 6px;
     width: 50%;
     border: none;
 	}
