@@ -1,9 +1,6 @@
 # v0.9
 ## Still to come:
-- Add share buttons, Twitter, Facebook
-- Reset to fresh user data values - fix strongest/weakest tracks
-- Add credit to RCI on reference lap time page.
-
+- Help / hints on usage.
 
 # Rate My Racing
 By Kevin Chaplin
@@ -26,12 +23,15 @@ And of course for me, a chance to continue my web development studies in the pur
 
 ## Credits
 
-Lap times for each category per circuit taken from Race Club International. https://www.racingclubinternational.com/
+- Lap times for each category and circuit taken from Race Club International. https://www.racingclubinternational.com/  
 Currently awaiting feedback before project is made public.
+- Social Media buttons courtesy of pchynoweth/svelte-share-buttons-component  https://github.com/pchynoweth/svelte-share-buttons-component
 
-## Wish-list
+## Wish-list / Future functionality
 
 Ability to download/upload user data. This would help prevent users losing their data. Currently data is stored using localStorage which is not optimal.
   - Needs further investigation.
 Ability to upload lap times from third party data-logging software to the Pace Calculator to calculate lap pace.
   - Not possible directly from the sim. Will have to check for software in use, and data formats, etc.
+Contact page
+  - If project is popular with racing community and feedback sought for further development.

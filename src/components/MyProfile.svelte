@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
   import { user } from '../stores/UserStore.js'
   import { userTitle, driverRating , circuitEval } from '../stores/DerivedStore.js'
+	import { Email, Reddit, Facebook, Twitter } from 'svelte-share-buttons-component';
 
 // -- Display user information --
 // Inputs for Name and Nationality
@@ -25,6 +26,17 @@
 			}
     }
   })
+// -- For Social Media Links --
+	let myUrl = "https://kevchaplin.github.io/rate-my-racing/"
+	let shareText =
+`${$userTitle}
+${$driverRating.rating} rated driver
+Assetto Corsa Competizione`;
+	let shareTitle = $userTitle
+	let shareEmail =
+`Hey checkout my new rank from ${myUrl}
+
+${shareText}`;
 </script>
 
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
@@ -53,15 +65,22 @@
       <td class="right-text">{!$driverRating.rank ? "none" : `"${$driverRating.rank}"`}</td>
 		</tr>
 		<tr>
-      <td class="left-text">Strongest Track:</td>
+      <td class="left-text">Strongest Circuit:</td>
       <td class="right-text">{strongest}</td>
 		</tr>
 		<tr>
-      <td class="left-text">Weakest Track:</td>
+      <td class="left-text">Weakest Circuit:</td>
       <td class="right-text">{weakest}</td>
 		</tr>
   </table>
+	<div class="social-media">
+		<Twitter class="share-button" text="{shareText}" url="{myUrl}" />
+		<Reddit class="share-button" title="{shareText}" url="{myUrl}" />
+		<Facebook class="share-button" url="{myUrl}" />
+		<Email subject="{shareTitle}" body="{shareEmail}" />
+	</div>
 </div>
+
 
 <style>
   .container {
@@ -80,12 +99,12 @@
 		color: white;
     width: 100%;
     border-spacing: 0 6px;
-		font-size: 14px;
+		font-size: 16px;
   }
 	td {
 		background-color: rgba(0, 0, 0, 0.7);
 		margin: 0;
-    padding: 8px 8px;
+    padding: 6px 6px;
     width: 50%;
     border: none;
 	}
@@ -138,6 +157,9 @@
   ::placeholder {
     color: #707070;
   }
+	.social-media {
+		margin-top: 15px;
+	}
 
   @media only screen and (min-width: 600px) {
 		table {
@@ -154,5 +176,9 @@
     input {
       width: 300px;
     }
+		.social-media {
+			margin-top: 35px;
+		}
+
   }
 </style>

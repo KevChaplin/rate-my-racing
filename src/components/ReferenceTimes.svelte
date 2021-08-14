@@ -27,6 +27,7 @@
     </tr>
     {/each}
   </table>
+  <p>All reference lap times provided by:<br><a href="https://www.racingclubinternational.com/" target="_blank">Racing Club International</a></p>
 </div>
 
 <style>
@@ -67,6 +68,9 @@
   }
   .bronze {
     background: linear-gradient(330deg, #732100, #a14521, #ffdeca, #ca7345);
+  }
+  p {
+    color: white;
   }
 
   @media only screen and (min-width: 600px) {
