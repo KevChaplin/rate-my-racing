@@ -99,7 +99,7 @@ ${shareText}`;
 		color: white;
     width: 100%;
     border-spacing: 0 6px;
-		font-size: 14px;
+		font-size: 16px;
   }
 	td {
 		background-color: rgba(0, 0, 0, 0.7);

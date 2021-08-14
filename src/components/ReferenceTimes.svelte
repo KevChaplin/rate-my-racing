@@ -27,7 +27,7 @@
     </tr>
     {/each}
   </table>
-  <p>All reference lap times provided by:<br><a href="https://www.racingclubinternational.com/" target="_blank">Racing Club International<a/></p>
+  <p>All reference lap times provided by:<br><a href="https://www.racingclubinternational.com/" target="_blank">Racing Club International</a></p>
 </div>
 
 <style>
