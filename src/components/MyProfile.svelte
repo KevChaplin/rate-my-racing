@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
   import { user } from '../stores/UserStore.js'
   import { userTitle, driverRating , circuitEval } from '../stores/DerivedStore.js'
+	import { Email, Reddit, Facebook, Twitter } from 'svelte-share-buttons-component';
 
 // -- Display user information --
 // Inputs for Name and Nationality
@@ -25,14 +26,17 @@
 			}
     }
   })
-
-// -- Tweet Button --
-	// Create text for tweet
-	let tweetText =
-	`${$userTitle}
+// -- For Social Media Links --
+	let myUrl = "https://kevchaplin.github.io/rate-my-racing/"
+	let shareText =
+`${$userTitle}
 ${$driverRating.rating} rated driver
-Assetto Corsa Competizione`
+Assetto Corsa Competizione`;
+	let shareTitle = $userTitle
+	let shareEmail =
+`Hey checkout my new rank from ${myUrl}
 
+${shareText}`;
 </script>
 
 <div class="container" in:fade="{{delay: 500, duration: 1000}}" out:fade="{{duration: 400}}">
@@ -61,32 +65,20 @@ Assetto Corsa Competizione`
       <td class="right-text">{!$driverRating.rank ? "none" : `"${$driverRating.rank}"`}</td>
 		</tr>
 		<tr>
-      <td class="left-text">Strongest Track:</td>
+      <td class="left-text">Strongest Circuit:</td>
       <td class="right-text">{strongest}</td>
 		</tr>
 		<tr>
-      <td class="left-text">Weakest Track:</td>
+      <td class="left-text">Weakest Circuit:</td>
       <td class="right-text">{weakest}</td>
 		</tr>
   </table>
-	<a
-		class="twitter-share-button"
-		href="https://twitter.com/intent/tweet"
-		data-text={tweetText}
-		data-url="https://kevchaplin.github.io/rate-my-racing/"
-		data-show-count="false">
-	</a>
-	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<iframe
-		src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fkevchaplin.github.io%2Frate-my-racing%2F&layout=button&size=small&width=67&height=20&appId"
-		width="67"
-		height="20"
-		style="border:none;overflow:hidden"
-		scrolling="no"
-		frameborder="0"
-		allowfullscreen="true"
-		allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-	</iframe>
+	<div class="social-media">
+		<Twitter class="share-button" text="{shareText}" url="{myUrl}" />
+		<Reddit class="share-button" title="{shareText}" url="{myUrl}" />
+		<Facebook class="share-button" url="{myUrl}" />
+		<Email subject="{shareTitle}" body="{shareEmail}" />
+	</div>
 </div>
 
 
@@ -165,6 +157,9 @@ Assetto Corsa Competizione`
   ::placeholder {
     color: #707070;
   }
+	.social-media {
+		margin-top: 15px;
+	}
 
   @media only screen and (min-width: 600px) {
 		table {
@@ -181,5 +176,9 @@ Assetto Corsa Competizione`
     input {
       width: 300px;
     }
+		.social-media {
+			margin-top: 35px;
+		}
+
   }
 </style>
