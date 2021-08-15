@@ -72,3 +72,33 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+/*
+.has-tooltip {
+	position: relative;
+}
+.has-tooltip:hover::before {
+	visibility: visible;
+  opacity: 1;
+	transform: translate(-75%, 0);
+	transition-delay: 1.5s;
+}
+.has-tooltip::before {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 2;
+	min-width: 200px;
+	max-width: 300px;
+	padding: 5px;
+	font-size: 14px;
+	line-height: 20px;
+	border-radius: 4px;
+	background-color: rgba(0,0,0,0.9);
+	color: white;
+	content: attr(data-tooltip);
+	bottom: calc(100% + 5px);
+	left: 50%;
+	transform: translate(-75%, 50%);
+	transition: .4s ease-out;
+} */

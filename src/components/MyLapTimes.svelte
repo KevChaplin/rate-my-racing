@@ -9,6 +9,8 @@ import autoSeparator from '../shared/autoSeparator.js'
   // User enters lap time (input elements)
   // Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
 
+let tooltip = "Use average lap time over at least 10 laps, with optimal track condition, track temperature 25-30C and at least 80L of fuel. Format m:ss.xxx."
+
 // On input change, update store: inputArr, which records all input values so they can be validated.
 // Any changed input value is added to array, overwriting any already input values for same circuits.
 function inputChange(e) {
@@ -44,7 +46,7 @@ function circuitRating(circuit) {
     <tr>
       <td>{entry.circuit}</td>
       <td>{entry.location}</td>
-      <td>
+        <td class="has-tooltip" data-tooltip={tooltip}>
         <input id={entry.circuit} type="text" value={entry.user} placeholder="0:00.000" on:input={e => autoSeparator(e)} on:change={(e) => inputChange(e)}>
       </td>
       <td value={circuitRating(entry.circuit)}>{circuitRating(entry.circuit)}</td>
@@ -87,14 +89,13 @@ function circuitRating(circuit) {
   }
   th, td {
     background-color: rgba(255, 255, 255, 0.7);
-    overflow: hidden;
   }
   th {
     padding: 10px 0;
   }
   input {
     height: 100%;
-    width: 80px;
+    width: 70px;
     margin: 0;
     padding: 0;
     background-color: rgba(255, 255, 255, 0.2);
