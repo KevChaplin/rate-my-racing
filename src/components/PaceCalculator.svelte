@@ -14,6 +14,7 @@
   let currentCircuit = ""
   let currentPace = ""
   let entryAdded = false
+  let tooltip = "With optimal track condition, track temperature 25-30C and at least 80L of fuel, complete at least 10 laps. Insert lap times here to calculate average pace, compare with current record and update if required. Format m:ss.xxx."
 
   // Move focus to newly created entry (for easy input of entries).
   // "entryAdded" variable included so that focus only moves when inut box complete - allows user to edit previous entries.
@@ -106,7 +107,7 @@
 
   <div id="lap-times" class="lap-times">
     {#each $paceTimes as paceTime, i}
-    <div>
+    <div class="has-tooltip" data-tooltip={tooltip}>
       <p class="text-left">Lap {i+1}</p>
       <input id={`time${i}`} bind:value={paceTime} placeholder="0:00.000" on:input={e => autoSeparator(e)}>
     </div>

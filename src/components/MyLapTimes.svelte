@@ -9,7 +9,7 @@ import autoSeparator from '../shared/autoSeparator.js'
   // User enters lap time (input elements)
   // Save button (subcomponent: SaveButton.svelte) triggers check and update of stored user laptimes.
 
-let tooltip = "Use average lap time over at least 10 laps, with optimal track condition, track temperature 25-30C and at least 80L of fuel. Format m:ss.xxx."
+let tooltip = "Insert average lap time over at least 10 laps, with optimal track condition, track temperature 25-30C and at least 80L of fuel. Format m:ss.xxx."
 
 // On input change, update store: inputArr, which records all input values so they can be validated.
 // Any changed input value is added to array, overwriting any already input values for same circuits.

@@ -72,15 +72,15 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
-/*
+
 .has-tooltip {
 	position: relative;
 }
 .has-tooltip:hover::before {
 	visibility: visible;
   opacity: 1;
-	transform: translate(-75%, 0);
-	transition-delay: 1.5s;
+	transform: translate(-50%, 0);
+	transition-delay: 1s;
 }
 .has-tooltip::before {
 	position: absolute;
@@ -99,6 +99,6 @@ button:focus {
 	content: attr(data-tooltip);
 	bottom: calc(100% + 5px);
 	left: 50%;
-	transform: translate(-75%, 50%);
+	transform: translate(-50%, 50%);
 	transition: .4s ease-out;
-} */
+}

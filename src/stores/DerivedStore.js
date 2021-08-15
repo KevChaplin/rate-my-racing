@@ -9,7 +9,7 @@ const userRanks = [
   "Mobile Chicane",
   "Captain Slow",
   "T1 Menace",
-  "Blue flag?",
+  "Blue flag",
   "Divebomb!",
   "Rage Quit",
   "Dangerous",
