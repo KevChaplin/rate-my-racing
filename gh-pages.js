@@ -1,7 +1,7 @@
 var ghpages = require('gh-pages');
 
 ghpages.publish(
-	'public', public
+	'public',
 	{
 		branch: 'gh-pages',
 		repo: 'https://github.com/KevChaplin/rate-my-racing',
